@@ -5,27 +5,28 @@ The Tapis API provides a way to access and manage the data storage and compute r
 
 ### Tapis Storage Systems
 
-Storage systems tell Tapis where data resides.  You can store files for running compute jobs, archive results, share files with collaborators, and maintain copies of your Tapis apps on storage systems.  Tapis supports many of the communication protocols and  permissions models that go along with them, so you can work privately, collaborate with individuals, or provide an open community resource.  It's up to you.  Here is an example of a simple data storage system template accessed via SFTP for the TACC Corral cloud storage system:
+Storage systems tell Tapis where data resides.  You can store files for running compute jobs, archive results, share files with collaborators, and maintain copies of your Tapis apps on storage systems.  Tapis supports many of the communication protocols and  permissions models that go along with them, so you can work privately, collaborate with individuals, or provide an open community resource.  It's up to you.  Here is an example of a simple data storage system template accessed via SFTP for the TACC cloud storage system on Stampede2:
 ```json
 {
-  "id": "UPDATEUSERNAME.tacc.corral.storage",
-  "name": "Storage system for TACC cloud storage on corral",
+  "id": "UPDATEUSERNAME.tacc.S2.storage",
+  "name": "Storage system for TACC cloud storage on S2",
   "status": "UP",
   "type": "STORAGE",
-  "description": "Storage system for TACC cloud storage on corral",
+  "description": "Storage system for TACC cloud storage on S2",
   "site": "www.tacc.utexas.edu",
   "public": false,
   "default": true,
   "storage": {
-    "host": "cloud.corral.tacc.utexas.edu",
+    "host": "stampede2.tacc.utexas.edu",
     "port": 22,
     "protocol": "SFTP",
     "rootDir": "/",
-    "homeDir": "/home/UPDATEUSERNAME/",
+    "homeDir": "/work/dir../UPDATEUSERNAME/",
     "auth": {
       "username": "UPDATEUSERNAME",
-      "password": "UPDATEPASSWORD",
-      "type": "PASSWORD"
+      "publicKey":"",
+      "privateKey":"",
+      "type": "SSHKEYS"
     }
   }
 }
@@ -41,26 +42,26 @@ Storage systems tell Tapis where data resides.  You can store files for running 
 * **protocol** - This is the communication protocol most systems use SFTP but others are supported.
 * **rootDir** - This is the lowest directory any Tapis user accessing this system can navigate.
 * **homeDir** - This is the directory that a Tapis user will access by default.
-* **auth** - The Authenication type to use when accessing the system - in this tutorial we are using a PASSWORD Auth but SSH-KEYS is usually recommended.
+* **auth** - The Authenication type to use when accessing the system - in this tutorial we are using SSH-KEYS, you may use PASSWORD authentication as well
 * **public** - Is this a shared resource available to all users - only Administrators can set this to TRUE.
 * **default** - TRUE or FALSE if this is the default system for Tapis to use when not explicitly passed a system.
 
 More details on the possible parameters for storage systems can be found in the [Tapis Storage System documentation](https://tacc-cloud.readthedocs.io/projects/agave/en/latest/agave/guides/systems/systems-storage.html).
 
-### Hands-on (We have already provisioned this storage system for the PEARC workshop for you. Skip for the workshop.)
+### Hands-on 
 
-As a hands on exercise, using the Tapis CLI, register a data storage system using PASSWORD authentication with the above template for the TACC Corral Cloud store. Don't forget to replace *UPDATEUSERNAME* and *UPDATE PASSWORD*.  Call the JSON file "cloud_corral.json"
+As a hands on exercise, you will register a storage system using your ssh key pair that can be used to login to Stampede2. Your public key must be placed in the authorized keys file on Stampede2. Copy the above template in storage.json file on your pwd in the CLI terminal. Please make sure to change the username, home dir and auth block in the above template.
 
-Then the CLI command to use is:
+CLI command to register is:
 ```
-systems-addupdate -F cloud_corral.json
+tapis systems create -F storage.json
 ```
 
-The above command will submit the JSON file "cloud_corral.json" to Tapis and create a new system with the attributes specified in the JSON file.
+The above command will submit the JSON file "storage.json" to Tapis and create a new system with the attributes specified in the JSON file.
 
 You can now see the you new system by running the following Tapis CLI command:
 ```
-systems-list
+tapis systems list
 ```
 
 ---
@@ -77,18 +78,19 @@ Execution systems in Tapis are very similar to storage systems.  They just have 
   "description": "Execution system for Stampede2 ",
   "site": "www.tacc.utexas.edu",
   "executionType": "HPC",
-  "scratchDir": "/home1/0003/UPDATEUSERNAME/scratch",
-  "workDir": "/home1/0003/UPDATEUSERNAME/work",
+  "scratchDir": "/home1/dir/UPDATEUSERNAME/scratch",
+  "workDir": "/home1/dir/UPDATEUSERNAME/work",
   "login": {
     "host": "login1.stampede2.tacc.utexas.edu",
     "port": 22,
     "protocol": "SSH",
-    "scratchDir": "/home1/0003/UPDATEUSERNAME/scratch",
-    "workDir": "/home1/0003/UPDATEUSERNAME/work",
+    "scratchDir": "/home1/dir/UPDATEUSERNAME/scratch",
+    "workDir": "/home1/dir/UPDATEUSERNAME/work",
     "auth": {
       "username": "UPDATEUSERNAME",
-      "password": "UPDATEPASSWORD",
-      "type": "PASSWORD"
+      "publicKey":"",
+      "privateKey":"",
+      "type": "SSHKEYS"
     }
   },
   "storage": {
@@ -96,11 +98,12 @@ Execution systems in Tapis are very similar to storage systems.  They just have 
     "port": 22,
     "protocol": "SFTP",
     "rootDir": "/",
-    "homeDir": "/home1/0003/UPDATEUSERNAME",
+    "homeDir": "/home1/dir/UPDATEUSERNAME",
     "auth": {
-     "username": "UPDATEUSERNAME",
-      "password": "UPDATEPASSWORD",
-      "type": "PASSWORD"
+      "username": "UPDATEUSERNAME",
+      "publicKey":"",
+      "privateKey":"",
+      "type": "SSHKEYS"
     }
   },
   "maxSystemJobs": 100,
@@ -137,13 +140,23 @@ We covered what some of these keywords are in the storage systems section.  Belo
 Complete reference information is located here:
 [https://tacc-cloud.readthedocs.io/projects/agave/en/latest/agave/guides/systems/introduction.html]
 
-### Hands-on (We have already provisioned this execution system for the PEARC workshop for you. Skip for the workshop.)
+### Hands-on 
 
-As a hands on exercise, register the Stampede2 HPC as a execution system using the Tapis-CLI using the above JSON template. - Don't forget to change *UPDATEUSERNAME* and *UPDATEPASSWORD* to your tutorial or TACC username and *UPDATEPROJECT* and *UPDATERESERVATION* for this workshops Stampede2 provided project and reservation (or your personal ones if doing this on your own).  
+As a hands on exercise, register the Stampede2 HPC as a execution system using the Tapis-CLI using the above JSON template. Copy the above template in compute.json file on your pwd in the CLI terminal. - Don't forget to change *UPDATEUSERNAME* and *UPDATEPASSWORD* to your tutorial or TACC username and *UPDATEPROJECT* and *UPDATERESERVATION*.  
+
+CLI command to register is:
+```
+tapis systems create -F compute.json
+```
 
 In your CLI you can now get a list of your systems using:
 ```
-systems-list
+tapis systems list
+
 ```
 
-If you want to view just the storage systems you can use -S. For execution systems use -E.
+If you want to view just the systems 
+```
+tapis systems show -f json system_name
+
+```
