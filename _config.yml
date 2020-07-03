@@ -8,17 +8,9 @@ permalink: pretty
 nav:
   - Welcome and Background:
     - Welcome: ''
-  - Intro to Jupyter & Docker:
-    - Intro to Jupyter: block1/intro-to-jupyter
-    - Using Docker: block1/intro-to-docker
   - Intro to Tapis and The Command Line Interface:
     - Intro to Tapis(Agave): block3/tapis-intro
     - Intro to Tapis CLI: block3/tapis-cli
-  - Intro to Abaco:
-    - Intro to Abaco: block2/intro-to-abaco
-    - Running the Image classifier with Abaco: block2/running-image-classifier-in-abaco
-  - Intro to Singularity:
-    - Intro to Singularity: block3/intro-singularity
   - Intro to Systems:
     - Intro to Tapis Systems: block3/tapis-systems
   - Intro to Apps:
