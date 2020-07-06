@@ -17,3 +17,5 @@ nav:
     - Intro to Apps: block4/apps
   - Intro to Jobs:
     - Intro to Tapis Jobs with Aloe: block4/jobs
+
+theme: jekyll-theme-hacker
