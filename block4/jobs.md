@@ -9,11 +9,10 @@ The Agave jobs service has been recently rearchitectured, to a new code-named Al
 An example Job JSON defintion:
 ```
 {
-  "name":"UPDATEUSERNAME.app.imageclassify",
+  "name":"UPDATEUSERNAME.job.imageclassify",
   "appId":"UPDATEAPPID",
-  "archive":true,
-  "archiveSystem":"UPDATESTORAGESYSTEM",
-  "memoryPerNode":"1",
+  "archive":false,
+  "inputs": {},
   "parameters": { 
     "imagefile": "https://texassports.com/images/2015/10/16/bevo_1000.jpg"
     } 
@@ -22,8 +21,6 @@ An example Job JSON defintion:
 * **appId**	- The unique ID (name + version) of the application run by this job. This must be a valid application that the user has permission to run.
 * **name**	-  The user selected name for the job.
 * **archive**	-	Whether the job output should be archived. When true, all new files created during job execution will be moved to the archivePath.
-* **memoryPerNode**	-	The memory requested for each node on which the job runs. Values are expressed as [num][units], where num can be a decimal number and units can be KB, MB, GB, TB (default = GB). Examples include 200MB, 1.5GB and 5.
-* **archiveSystem**	-	The unique id of the storage system on which the job output will be archived. 
 * **parameters** - Application-specific parameters with types defined in the application defintion. <br/>
 **appId** and **name** are required parameters. 
 Please refer to all the job parameters here [Job Parameters](https://tacc-cloud.readthedocs.io/projects/agave/en/latest/agave/guides/jobs/aloe-job-changes.html#submission-request-parameters)
@@ -37,77 +34,65 @@ Note that you can specify which **queue** to use as well as **runtime limits** i
 Lets run our very first Tapis(Aloe) Job! <br/>
 
 ### Step 1: Crafting a Job Definition 
-
-Create [job.json](./templates/job.json) file in your home directory on Jetstream VM and update the values for fields **name**, **appID** and **archiveSystem**. 
-
 You can find the appId of the app that you just registered and your storage system id with the command below.
 
 ```
-apps-list
-systems-list
+$ tapis apps list
 ```
-In the job.json, you will see archive set as **True**. With this setting, all new files created during job execution will get copied to the archiveSystem. 
+
+Modify the job.json with the app id obtained with apps list
+```
+{
+  "name":"UPDATEUSERNAME.job.imageclassify",
+  "appId":"UPDATEAPPID",
+  "archive":false,
+  "inputs": {},
+  "parameters": { 
+    "imagefile": "https://texassports.com/images/2015/10/16/bevo_1000.jpg"
+    } 
+}
+```
 
 
 ### Step 2: Submit job 
 
-Run the job submission command from the directory on your VM, where you created job.json
+Run the job submission command from the directory where you have job.json
 
 ```
-jobs-submit -F job.json
-```
-
-Alternately, this command can be run with -V option to get a detialed job response 
+$ tapis job submit -F job.json 
 
 ```
-jobs-submit -F job.json -V
-```
 
-You should see a message "Successfully submitted job job-id". Everytime you submit a job, a unique job id is created. You will use this job id with other CLI commands to get the Job Status, output listing and much more.
+You should see job id, name of job and status as "ACCEPTED"
 
-
-### Jobs List
-Now, when you do a jobs-list you can see your job id
-
+### Step 3: Check Job Status
+Job status allows you to see the current state of the job. You can check the status of job with followinng command. You can also set up email or webhook notification and get notified when the job state changes
 
 ```
-jobs-list
-```
-
-### Jobs Status
-Job status allows you to see the current state of the job. You can also set up email or webhook notification and get notified when the job state changes
-
-
-```
-jobs-status <jobId>
+$ tapis jobs status {job id}
 ```
 
 Job enters into different states throughout the execution. Details about different job states are given here [JOB STATES](https://tacc-cloud.readthedocs.io/projects/agave/en/latest/agave/guides/jobs/aloe-job-changes.html#job-states)
 
 
-### Jobs Output
-
-
-```
-jobs-output-list -L <jobId>
-```
-
-With this command, you can see the current files in the output folder. <br/>
-When archive is true, all the new files will get copied to archive directory on your archive system. When it is false, all the output files can be found on the execution system's scratch directory
-
-To retrieve the output **predictions.txt** file we will use the `jobs-output-get` command below:
+### Step 4: Download Job Output. This may take few minutes. 
 
 ```
-jobs-output-get -r <jobId>
-```
-
-For example, if using the `train510` account with job uuid `8c7a91ac-7da5-44ad-a6dd-39f010e87e54-007`, the command would be:
+tapis jobs output download {job id}
 
 ```
-jobs-output-get -r 8c7a91ac-7da5-44ad-a6dd-39f010e87e54-007
-```
 
-You should see a "jobs-jobId" folder created in your present working directoty, which contains the predictions.txt file along with .err and .log files.
+With this command, you can see the job folder in pwd. <br/>
+You can cd in to the folder and cat the predictions.txt file. If the job ran successfully you should see following output
+```
+>> Downloading inception-2015-12-05.tgz 100.0%
+Successfully downloaded inception-2015-12-05.tgz 88931400 bytes.
+ox (score = 0.80479)
+water buffalo, water ox, Asiatic buffalo, Bubalus bubalis (score = 0.06445)
+oxcart (score = 0.02327)
+ram, tup (score = 0.00376)
+lakeside, lakeshore (score = 0.00230)
+```
 
 
 ### Jobs Notifications
