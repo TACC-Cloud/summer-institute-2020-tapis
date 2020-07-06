@@ -18,12 +18,8 @@ Apps service is a central registry for all Tapis(Agave) apps. With Apps service 
 The rest of this tutorial explains details about how to package your Tapis(Agave) app, register your app with the Apps service and some other useful CLI commands for Apps. 
 
 
-### App Packaging 
-Tapis(Agave) apps are bundled into a directory and organized in a way that Tapis(Aloe) jobs can properly invoke it. Tapis(Aloe) is the new code name for rearchitectured Agave Jobs service. We will discuss more on this in the next part of the tutorial. Though there is plenty of opportunity to establish your own conventions, at the very least, your application folder should have the following in it:
-
-*  
-* 
 ### Create Private App: Image Classifier 
+Tapis(Agave) apps are bundled into a directory and organized in a way that Tapis(Aloe) jobs can properly invoke it. Tapis(Aloe) is the new code name for rearchitectured Agave Jobs service. We will discuss more on this in the next part of the tutorial. 
 
 ## Step 1: Initialize the app directory with following command
 ```
