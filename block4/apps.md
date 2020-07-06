@@ -66,7 +66,7 @@ A brief summary of the files are as follows:
 * project.ini: initialization parameters for the app which are injected in to app.json
 
 
-##Step 2: Edit the project.ini file
+## Step 2: Edit the project.ini file
 By default, the fields are populated by some of the flags specified on the command line or picked up from the environment. 
 Set the following:
 ```
@@ -82,7 +82,7 @@ execution_system = {your private execution system on S2 created in this tutorial
 * Note this path, this is the deploymentPath in the app.json
 
 
-### Step 4: Create a wrapper.sh
+## Step 4: Create a wrapper.sh
 In order to run your application, you will need to create a wrapper template that calls your executable code. For the sake of maintainability, it should be named something simple and intuitive like `wrapper.sh`. The singularity image to run the app is stored in a public location /work/05278/ajamthe/stampede2/public/gateways19-classifier.simg, make sure you ** keep it as it is **
 * Create a file wrapper.sh in the deployment folder and copy the script below into the wrapper.sh file
 ```
@@ -90,8 +90,9 @@ In order to run your application, you will need to create a wrapper template tha
 module load tacc-singularity/3.4.2
 
 singularity run /work/05278/ajamthe/stampede2/public/gateways19-classifier.simg  python /classify_image.py ${imagefile} ${predictions} > predictions.txt
+```
 
-### Step 5: Create a test script
+## Step 5: Create a test script
 A test script named something simple and intuitive like `tester.sh`, along with any sample data needed to evaluating whether the application can be executed in a current command-line environment. It should exit with a status of 0 on success when executed on the command line. A simple way to create your test script is to set some sensible default values for your app's inputs and parameters and then call your wrapper template.
 
 * Create a file tester.sh in the same folder and copy the script below into the tester.sh file
@@ -196,7 +197,7 @@ An example Tapis App JSON definition:
 Some of the above fields are manadatory to register the app. A complete list of application metadata can be found at [Application Metadata](https://tacc-cloud.readthedocs.io/projects/agave/en/latest/agave/guides/apps/app-wrapper-templates.html#application-metadata)
 
 
-##Step 7: Registering an app  
+## Step 7: Registering an app  
 Registering an app with the Apps service is conceptually simple. Just describe your app as a JSON document and POST it to the Apps service. From the folder where you have app.json run command below
 ```
 $ tapis apps create -F app.json 
@@ -225,7 +226,7 @@ To view the permissions on the app for different users
 ```
 $ tapis apps pems list {app_id}
 
-   ```
+```
 
  Now that we have our very first app ready to use, we are ready to run it on Stampede2 using Tapis(Aloe) Jobs service. 
 
