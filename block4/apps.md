@@ -21,57 +21,137 @@ The rest of this tutorial explains details about how to package your Tapis(Agave
 ### App Packaging 
 Tapis(Agave) apps are bundled into a directory and organized in a way that Tapis(Aloe) jobs can properly invoke it. Tapis(Aloe) is the new code name for rearchitectured Agave Jobs service. We will discuss more on this in the next part of the tutorial. Though there is plenty of opportunity to establish your own conventions, at the very least, your application folder should have the following in it:
 
-* In order to run your application, you will need to create a wrapper template that calls your executable code. For the sake of maintainability, it should be named something simple and intuitive like `wrapper.sh`. 
-* A library subdirectory: This contains all scripts, non-standard dependencies, binaries needed to execute an instance of the application.  
-* A test directory containing a script named something simple and intuitive like `test.sh`, along with any sample data needed to evaluating whether the application can be executed in a current command-line environment. It should exit with a status of 0 on success when executed on the command line. A simple way to create your test script is to set some sensible default values for your app's inputs and parameters and then call your wrapper template.
+*  
+* 
+### Create Private App: Image Classifier 
 
-The resulting minimal app bundle would look something like the following:
+## Step 1: Initialize the app directory with following command
+```
+$ tapis app init --app-label classifier --app-description "Image classifier" --app-version 0.0.1 classifier_app
+```
+The response should look like
+```
++-------+---------------------------------------+
+| stage | message                               |
++-------+---------------------------------------+
+| setup | Project name: classifier_app          |
+| setup | Project description: Image classifier |
+| setup | Project version: 0.0.1                |
+| setup | Safened project name: classifier_app  |
+| setup | Project path: ./classifier_app        |
+| clone | Project path: ./classifier_app        |
++-------+---------------------------------------+
+```
+This will create a new template app folder (in this case, called /work/classifier)
 
 ```
-classifyApp-1.0
-|- app.json
-|- pearc19-classifier.simg
-|+ test
- |- test.sh
-|- wrapper.sh
+$ ls -la classifier_app
+classifier_app
+├── Dockerfile
+├── app.json
+├── assets
+│   ├── lib
+│   │   ├── VERSION
+│   │   └── container_exec.sh
+│   ├── runner.sh
+│   └── tester.sh
+├── job.json
+└── project.ini
+```
+A brief summary of the files are as follows:
+
+* Dockerfile: a Dockerfile for the app runtime
+* app.json: json file describing the app metadata, inputs, parameters, and outputs
+* VERSION: version file containing the image tag
+* container_exec.sh: utility script for executing a container on a TACC HPC system
+* runner.sh: main run script for the app; takes input and parameters from app.json
+* tester.sh: legacy script that may be used to run a local test
+* job.json: template for a job json file specific to this app
+* project.ini: initialization parameters for the app which are injected in to app.json
+
+
+##Step 2: Edit the project.ini file
+By default, the fields are populated by some of the flags specified on the command line or picked up from the environment. 
+Set the following:
+```
+deployment_system = {your private storage system created in this tutorial}
+execution_system = {your private execution system on S2 created in this tutorial}
 ```
 
-classifyApp-1.0 is a folder present on your Jetstream VM inside the path ~/applications. We have pre-installed singularity image for you. We will create rest of the app assets soon. But before we go into that lets have a quick look at the App Metadata.
+## Step 3: Create the deployment folder on $WORK of Stampede2
+* In a separte terminal login to Stampede2 using your TACC credentials and TACC MFA token
+* echo $WORK
+* cd to the work directory
+* mkdir classifyapp
+* Note this path, this is the deploymentPath in the app.json
 
+
+### Step 4: Create a wrapper.sh
+In order to run your application, you will need to create a wrapper template that calls your executable code. For the sake of maintainability, it should be named something simple and intuitive like `wrapper.sh`. The singularity image to run the app is stored in a public location /work/05278/ajamthe/stampede2/public/gateways19-classifier.simg, make sure you ** keep it as it is **
+* Create a file wrapper.sh in the deployment folder and copy the script below into the wrapper.sh file
+```
+#/bin/bash
+module load tacc-singularity/3.4.2
+
+singularity run /work/05278/ajamthe/stampede2/public/gateways19-classifier.simg  python /classify_image.py ${imagefile} ${predictions} > predictions.txt
+
+### Step 5: Create a test script
+A test script named something simple and intuitive like `tester.sh`, along with any sample data needed to evaluating whether the application can be executed in a current command-line environment. It should exit with a status of 0 on success when executed on the command line. A simple way to create your test script is to set some sensible default values for your app's inputs and parameters and then call your wrapper template.
+
+* Create a file tester.sh in the same folder and copy the script below into the tester.sh file
+```
+#!/bin/bash
+module load tacc-singularity/3.4.2
+
+export imagefile="--image_file=https://s3.amazonaws.com/cdn-origin-etr.akc.org/wp-content/uploads/2017/11/12231410/Labrador-Retriever-On-White-01.jpg"
+export predictions="--num_top_predictions 5"
+
+cd ../ && bash wrapper.sh
+
+```
+
+## Step 6: Modify app.json
+This is a templated app json file. By default, it will grab the app name, version, executionSystem, deploymentSystem, and other parameters from your project.ini. Copy the app.json from below and paste in your app.json and make following changes:
+* Change the name of execution system to your execution system name
+* Change the value of deploymentPath to one obtained in Step 2
+* Change the name of deploymentSystem to your storage system name
 
 ### Application Metadata
 An example Tapis App JSON definition:
 ```
 {
-  "name": "UPDATEUSERNAME.app.imageclassify",
-  "version": "1.0",
-  "label": "Image Classifier",
-  "shortDescription": "Classify an image using a small ImageNet model",
-  "longDescription": "",
-  "tags": [
-    "tensorflow",
-    "ImageNet"
-  ],
-  "deploymentSystem": "UPDATEUSERNAME.tacc.corral.storage",
-  "deploymentPath": "/home/UPDATEUSERNAME/applications/classifyApp-1.0/",
-  "templatePath": "wrapper.sh",
-  "testPath": "test/test.sh",
-  "executionSystem": "UPDATEUSERNAME.stampede2.execution",
+  "checkpointable": false,
+  "name": "{{ app.name }}",
+  "executionSystem": "replace with execution system name",
   "executionType": "HPC",
-  "helpURI": "https://github.com/tapis-project/hpc-in-the-cloud/",
+  "deploymentPath": "replace with deployment path",
+  "deploymentSystem": "replace with storage system name",
+  "helpURI": "",
+  "label": "{{ app.label }}",
+  "shortDescription": "{{ app.description }}",
+  "longDescription": "",
+  "modules": [
+    "load tacc-singularity/3.4.2"
+  ],
+  "ontology": [],
   "parallelism": "SERIAL",
-  "modules": ["load tacc-singularity/2.6.0"],
+  "tags": [],
+  "templatePath": "wrapper.sh",
+  "testPath": "tester.sh",
+  "version": "{{ app.version }}",
+  "defaultMaxRunTime": "00:30:00",
   "inputs": [],
-  "parameters": [{
+  "parameters": [
+  {
     "id": "imagefile",
     "details": {
       "label": "Image to classify",
-      "description": "",
+      "description":"",
       "argument": "--image_file ",
-      "showArgument": true
+      "showArgument":true
     },
     "semantics": {
-      "minCardinality": 1,
+      "minCardinality":1,
       "ontology": [
         "http://edamontology.org/format_3547"
       ],
@@ -84,8 +164,8 @@ An example Tapis App JSON definition:
       "type": "string",
       "visible": true
     }
-  },
-    {
+   },
+  {
     "id": "predictions",
     "details": {
       "label": "Number of predictions to return",
@@ -103,12 +183,12 @@ An example Tapis App JSON definition:
       "type": "number",
       "default": 5
     }
-  }],
-  "outputs": [],
-  "checkpointable": false
+  }
+  ],
+  "outputs": []
 }
-```
 
+```
 * **name** - Apps are given an ID by combining the "name" and "version". That combination must be unique across the entire Tapis(Agave) tenant, so unless you are an admin creating public system, you should probably put your username somewhere in there, and it's often useful to have the system name somehow referenced there too. You shouldn't use spaces in the name.
 * **version** - This should be the version of the software package that you are wrapping.  If you end up updating your app description later on, Tapis(Agave) will keep track of the app revision separately, so there is no need to reflect that here.
 * **deploymentSystem** - The data storage system where you keep the app assets, such as the wrapper script, test script, etc.  App assets are not stored on the execution system where they run.  For provenance and reproducibility, Tapis(Agave) requires that you keep them on a cloud storage system.
@@ -120,122 +200,11 @@ An example Tapis App JSON definition:
 Some of the above fields are manadatory to register the app. A complete list of application metadata can be found at [Application Metadata](https://tacc-cloud.readthedocs.io/projects/agave/en/latest/agave/guides/apps/app-wrapper-templates.html#application-metadata)
 
 
-### Exercise: Registering an app  
-Registering an app with the Apps service is conceptually simple. Just describe your app as a JSON document and POST it to the Apps service. 
-
-
-
-### Lets first check:
-
-* Your storage and execution systems that you registered with Tapis(Agave) can be listed with the command below
+##Step 7: Registering an app  
+Registering an app with the Apps service is conceptually simple. Just describe your app as a JSON document and POST it to the Apps service. From the folder where you have app.json run command below
 ```
-systems-list
+$ tapis apps create -F app.json 
 ```
-
-
-### Step 1: Creating the app bundle locally on your Jetstream VM
- *  Inside ~/applications/classifyApp-1.0 directory on your Jetstream VM,  you should see a pre-pulled classifier docker image "pearc19-classifier.simg". 
-
-```
-cd ~/applications/classifyApp-1.0
-
-ls -la
-```
-
-*  In the same classifyAp-1.0 directory, create a wrapper script file **wrapper.sh** and copy the script below into the wrapper.sh file. We have set this up to have a minimal wrapper script:
-
-```
-touch wrapper.sh
-```
-
-```
-#!/bin/bash
-module load tacc-singularity/2.6.0
-
-singularity run pearc19-classifier.simg python /classify_image.py ${imagefile} ${predictions} > predictions.txt
-```
-
-Within a wrapper script, you can reference the ID of any Tapis(Agave) input or parameter from the app description.  Before executing a wrapper script, Tapis(Agave) will look for the these references and substitute in whatever was that value was.  This will make more sense once we start running jobs, but this is the way we connect what you tell the Tapis(Agave) API that you want to do and what actually runs on the execution system.  The other thing Tapis(Agave) will do with the wrapper script is prepend all the scheduler information necessary to run the script on the execution system.
-
-* Test data:
-If you have a small set of test data, it can be useful to other developers if you include it in a **test** directory. Inside your classifyApp-1.0 directory, create a directory called **test** and create a test script called **test.sh** inside it.You can make sure your wrapper script runs fine using by running the test.sh on the Jetstream VM.
- 
-```
-cd ~/applications/classifyApp-1.0 && mkdir test && cd test && touch test.sh
-```
-
-Test script
-It is always a good idea to include a test script that can run your app against test data.  Paste the below bash script in your test.sh file
-
-
-```
-#!/bin/bash
-module load tacc-singularity/2.6.0
-
-export imagefile="--image_file https://s3.amazonaws.com/cdn-origin-etr.akc.org/wp-content/uploads/2017/11/12231410/Labrador-Retriever-On-White-01.jpg"
-export predictions="--num_top_predictions 5"
-
-cd ../ && bash wrapper.sh
-```
-
-Before you actually tranfer the app bundle to cloud storage, let's just verify if the wrapper script works as expected. We will run test.run on your Jetstream VM.
-Give executable permissions to your test.sh
-
-```
-chmod 700 test.sh
-```
-
-and then run command
-
-```
-./test.sh
-```
-
-Note: You may see some warnings about module not found. 
-The script should run fine and you should see the output file **predicitons.txt** inside the classifyApp1.0 folder. 
-
-
-### Step 2: Transfering your app bundle to the cloud storage system using Tapis(Agave) Files service. 
-You should run below commands from your Jetstream VM's classifyApp-1.0 folder. Replace the UPDATESTORAGESYSTEMID with the name of your storage system.
-
-We are making folders on your cloud storage systems with the commands below
-
-```
-files-mkdir agave://trainXXX.tacc.corral.storage/applications/
-
-files-mkdir agave://trainXXX.tacc.corral.storage/applications/classifyApp-1.0
-
-files-mkdir agave://trainXXX.tacc.corral.storage/applications/classifyApp-1.0/test
-```
-
-Copy the app bundle (Image file, wrapper script and test.sh) to your cloud storage system. 
-** Note: Make sure you do not miss the trailing / in the files-cp command ***
-
-```
-files-cp pearc19-classifier.simg agave://trainXXX.tacc.corral.storage/applications/classifyApp-1.0/
-
-files-cp wrapper.sh agave://trainXXX.tacc.corral.storage/applications/classifyApp-1.0/
-
-files-cp test/test.sh agave://trainXXX.tacc.corral.storage/applications/classifyApp-1.0/test/
-```
-
-### Step 3: Crafting your app definition 
-Your classifier app definiton [app.json](./templates/app.json) is written in JSON, and conforms to an Tapis (Agave)-specific data model. With minimal changes such as updating the names of storage and execution systems, you should be able to register your very first Tapis(Agave) app.
-
-```
-cd ~/applications/classifyApp-1.0 && touch app.json
-```
-
-copy the template app.json and make changes for your username
-
-
-### Step 4: Registering an app
-Once you have an application bundle ready to go and app definition crafted, you can run the following CLI command from classifyApp-1.0 directory from your Jetstream VM
-
-```
-apps-addupdate -F app.json
-```
-
 Tapis(Agave) will check the app description, look for the app bundle on the deploymentSystem, and if everything passes, make it available to run jobs with Tapis Jobs service.<br/>
 
 Some other useful CLI commands:
@@ -244,13 +213,13 @@ Some other useful CLI commands:
 Now if you list apps you should see the app you just registered. You should also see other public apps available to the user in that tenant
 
 ```
-apps-list 
+$ tapis apps list
 ```
 
 To see details about a specific app 
 
 ```
-apps-list -V {app_ID}
+$ tapis apps show {app_id}
 ```
 
 ### Managing App Permissions
@@ -258,14 +227,9 @@ apps-list -V {app_ID}
 To view the permissions on the app for different users 
 
 ```
- apps-pems-list {app_ID}
- ```
+$ tapis apps pems list {app_id}
 
- To grant permissions to a user
- 
- ```
- apps-pems-update -u {uname} -p READ_WRITE  {app_id}
- ```
+   ```
 
  Now that we have our very first app ready to use, we are ready to run it on Stampede2 using Tapis(Aloe) Jobs service. 
 
@@ -275,3 +239,4 @@ To view the permissions on the app for different users
 ## More Resources
 
 Building Tapis applications can be very rewarding way to share your code with your colleagues and the world. This is a very simple example. If you are interested to learn more, please check out the [App Management Tutorial](https://tacc-cloud.readthedocs.io/projects/agave/en/latest/agave/guides/apps/introduction.html).
+[Create custom App with Tapis CLI](https://tapis-cli-how-to-guide.readthedocs.io/en/latest/advanced-api/create_a_custom_app.html)
