@@ -235,5 +235,5 @@ $ tapis apps pems list {app_id}
 
 ## More Resources
 
-Building Tapis applications can be very rewarding way to share your code with your colleagues and the world. This is a very simple example. If you are interested to learn more, please check out the [App Management Tutorial](https://tacc-cloud.readthedocs.io/projects/agave/en/latest/agave/guides/apps/introduction.html).
+Building Tapis applications can be very rewarding way to share your code with your colleagues and the world. This is a very simple example. If you are interested to learn more, please check out the [App Management Tutorial](https://tacc-cloud.readthedocs.io/projects/agave/en/latest/agave/guides/apps/introduction.html),
 [Create custom App with Tapis CLI](https://tapis-cli-how-to-guide.readthedocs.io/en/latest/advanced-api/create_a_custom_app.html)
