@@ -5,44 +5,30 @@ The following instructions will guide you through setting up Tapis CLI.  As an a
 
 The Tapis CLI commands all respond with help for -h and return back information on the parameters that can be passed.  
 
-Need help?  Ask your questions using the [TACC Cloud Slack Channel](https://bit.ly/2XHYJEk)
+Need help?  Ask your questions using the [TACC Institutes Slack Channel](https://app.slackcom/client/T015E2VMTLH/C015RUFEYBH)
 
 Initial Requirements
 ===============================================
 
 Before getting started, you need to have the following:
-* A TACC Account - today you have a test account
+* A TACC Account 
 * SSH access to the Stampede 2 compute cluster and an allocation.
 * Familiarity with [editing text files](https://www.nano-editor.org/dist/v2.7/nano.html) and [working at the command line](http://www.gnu.org/software/bash/manual/bashref.html#Introduction)
 
-Any questions?  Join the [TACC CLOUD SLACK CHANNEL](https://bit.ly/2XHYJEk) and ask away.
+Any questions?  Join the [TACC Institute SLACK CHANNEL](https://app.slack.com/client/T015E2VMTLH/C015RUFEYBH) and ask away.
 
 
 Command Line Access
 ===================
 
-We won't install it in this workshop (since it is already installed on the VM), but everything we do today can also be done from the standard shell using the Tapis CLI tools.  
-
-Open a terminal in your Jupyter instance and that is what we will use to run the CLI commands.
-
-Jump to the [Authentication](https://github.com/tapis-project/uh-hpc-in-the-cloud/blob/master/block3/tapis-cli.md#authentication) section for the workshop.
-
-Installing the Tapis CLI Tools (Skip for Workshop- this is at home )
-------------------------------
+Open a terminal in your laptop and install Tapis CLI.
 
 Tapis has a downloadable set of command line tools that make it easier to work with the API from the shell. Using these scripts is generally easier than hand-crafting cURL commands, but if you prefer that route, consult the [Tapis API Documentation](https://tacc-cloud.readthedocs.io/en/latest/). We include these scripts in the training virtual machines and supplement them with additional support scripts, example files, and documents.
 
-During the course, we will use the Jetstream Cloud virtual machines, but if you have a shell on your personal computer, you can install these tools on your own later.
-
-To use access the CLI for this tutorial you can open a Terminal  in Jupyter which give you access to the shell in the Jetstream VM, OR *ssh* into the system from you own terminal:
-
-```ssh ubunut@jetstreamVM_ip_address```
-
-Install the CLI tools (Skip for Workshop- this is at home )
-----------------------------------
-
-The CLI tools and instructions for installation can be found in the [CLI repository](https://github.com/TACC-Cloud/agave-cli)
-
+```
+docker run --rm -it -v ${PWD}:/work -v ${HOME}/.agave:/root/.agave \
+      tacc/tapis-cli-ng:latest /bin/bash
+```
 
 Authentication
 ----------------
