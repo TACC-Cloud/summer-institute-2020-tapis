@@ -1,11 +1,12 @@
 # Managing systems
----
+
 
 The Tapis API provides a way to access and manage the data storage and compute resources you already use (or maybe the systems you want to use), but first you have to tell Tapis where they are, how to login, and how to communicate with that system.  That is done by giving Tapis a short JSON description for each system.  
 
 ### Tapis Storage Systems
 
 Storage systems tell Tapis where data resides.  You can store files for running compute jobs, archive results, share files with collaborators, and maintain copies of your Tapis apps on storage systems.  Tapis supports many of the communication protocols and  permissions models that go along with them, so you can work privately, collaborate with individuals, or provide an open community resource.  It's up to you.  Here is an example of a simple data storage system template accessed via SFTP for the TACC cloud storage system on Stampede2:
+
 ```json
 {
   "id": "UPDATEUSERNAME.tacc.S2.storage",
@@ -21,11 +22,11 @@ Storage systems tell Tapis where data resides.  You can store files for running 
     "port": 22,
     "protocol": "SFTP",
     "rootDir": "/",
-    "homeDir": "/work/dir../UPDATEUSERNAME/",
+    "homeDir": "/work/dir../UPDATEUSERNAME/stampede2",
     "auth": {
       "username": "UPDATEUSERNAME",
-      "publicKey":"",
-      "privateKey":"",
+      "publicKey":"paste public key here",
+      "privateKey":"paste private key here",
       "type": "SSHKEYS"
     }
   }
@@ -50,7 +51,12 @@ More details on the possible parameters for storage systems can be found in the 
 
 ### Hands-on 
 
-As a hands on exercise, you will register a storage system using your ssh key pair that can be used to login to Stampede2. Your public key must be placed in the authorized keys file on Stampede2. Copy the above template in storage.json file on your pwd in the CLI terminal. Please make sure to change the username, home dir and auth block in the above template.
+As hands on exercise, you will register a private storage system using ssh key pair that can be used to login to Stampede2. Your public key must be placed in the authorized keys file on Stampede2. Copy the above template in a new storage.json file on your pwd in the CLI terminal. Please make sure to change the username, home dir and auth block in the above template. It is recommended to generate one line private key using the command below to paste in the system definition.
+
+```
+awk -v ORS='\\n' '1' private_key_name
+
+```
 
 CLI command to register is:
 ```
@@ -63,6 +69,11 @@ You can now see the you new system by running the following Tapis CLI command:
 ```
 tapis systems list
 ```
+To make sure that the keys are configured correct, try to do a files listing using the system id
+```
+tapis files list agave://{system id here}/
+```
+If the keys are configured correct, it should show you the files on your stampede2 work dir. This is an important step and must not be missed.
 
 ---
 ### Tapis Execution Systems
@@ -88,8 +99,8 @@ Execution systems in Tapis are very similar to storage systems.  They just have 
     "workDir": "/home1/dir/UPDATEUSERNAME/work",
     "auth": {
       "username": "UPDATEUSERNAME",
-      "publicKey":"",
-      "privateKey":"",
+      "publicKey":"paste public key here",
+      "privateKey":"paste private key here",
       "type": "SSHKEYS"
     }
   },
@@ -101,8 +112,8 @@ Execution systems in Tapis are very similar to storage systems.  They just have 
     "homeDir": "/home1/dir/UPDATEUSERNAME",
     "auth": {
       "username": "UPDATEUSERNAME",
-      "publicKey":"",
-      "privateKey":"",
+      "publicKey":"paste public key here",
+      "privateKey":"paste private key here",
       "type": "SSHKEYS"
     }
   },
@@ -129,7 +140,7 @@ Execution systems in Tapis are very similar to storage systems.  They just have 
 
 We covered what some of these keywords are in the storage systems section.  Below is some commentary on the new fields:
 
-* **executionType** - Either HPC, Condor, or CLI.  Specifies how jobs should go into the system. HPC and Condor will leverage a batch scheduler. CLI will fork processes.
+* **executionType** - Either HPC, Condor, or CLI.  Specifies how jobs should go into the system. 
 * **scheduler** - For HPC or CONDOR systems, Agave is "scheduler aware" and can use most popular schedulers to launch jobs on the system.  This field can be LSF, LOADLEVELER, PBS, SGE, CONDOR, FORK, COBALT, TORQUE, MOAB, SLURM, UNKNOWN. The type of batch scheduler available on the system.
 * **environment** - List of key-value pairs that will be added to the Linux shell environment prior to execution of any command.
 * **scratchDir** - Whenever Agave runs a job, it uses a temporary directory to cache any app assets or job data it needs to run the job.  This job directory will exist under the "scratchDir" that you set.  The path in this field will be resolved relative to the rootDir value in the storage config if it begins with a "/", and relative to the system homeDir otherwise.
@@ -142,7 +153,7 @@ Complete reference information is located here:
 
 ### Hands-on 
 
-As a hands on exercise, register the Stampede2 HPC as a execution system using the Tapis-CLI using the above JSON template. Copy the above template in compute.json file on your pwd in the CLI terminal. - Don't forget to change *UPDATEUSERNAME* and *UPDATEPASSWORD* to your tutorial or TACC username and *UPDATEPROJECT* and *UPDATERESERVATION*.  
+As a hands on exercise, register the Stampede2 HPC as a execution system using the Tapis-CLI using the above JSON template. Copy the above template in new compute.json file on your pwd in the CLI terminal. Make changes into fields id, scratchDir, workDir,homeDir, auth stanza and customDirectives.  
 
 CLI command to register is:
 ```
@@ -159,4 +170,8 @@ If you want to view just the systems
 ```
 tapis systems show -f json system_name
 
+```
+Just like you did files listing for storage system, list files on execution system to make sure the keys are set up correct
+```
+tapis files list agave://compute system id/
 ```
