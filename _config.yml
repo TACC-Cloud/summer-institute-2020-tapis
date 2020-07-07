@@ -9,13 +9,13 @@ nav:
   - Welcome and Background:
     - Welcome: ''
   - Intro to Tapis and The Command Line Interface:
-    - Intro to Tapis(Agave): block3/tapis-intro
-    - Intro to Tapis CLI: block3/tapis-cli
+    - Intro to Tapis(Agave): block1/tapis-intro
+    - Intro to Tapis CLI: block1/tapis-cli
   - Intro to Systems:
-    - Intro to Tapis Systems: block3/tapis-systems
+    - Intro to Tapis Systems: block1/tapis-systems
   - Intro to Apps:
-    - Intro to Apps: block4/apps
+    - Intro to Apps: block2/apps
   - Intro to Jobs:
-    - Intro to Tapis Jobs with Aloe: block4/jobs
+    - Intro to Tapis Jobs with Aloe: block2/jobs
 
 theme: jekyll-theme-hacker
