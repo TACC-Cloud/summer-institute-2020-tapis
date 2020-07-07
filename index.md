@@ -1,6 +1,6 @@
 ## TACC Summer Institute Tapis Day
 
-## Part 1: Welcome and Background
+## Welcome and Background
 * [Welcome](./welcome/intro.md)
 
 ## Schedule
@@ -25,31 +25,31 @@ Presenters:
 
 
 ## Intro to Tapis 
-* [Intro to Tapis(Agave)](./block3/tapis-intro.md)
+* [Intro to Tapis(Agave)](./block1/tapis-intro.md)
 
-* [Intro to Tapis CLI](./block3/tapis-cli.md)
+* [Intro to Tapis CLI](./block1/tapis-cli.md)
 
 ## Tapis Systems
-* [Intro to Tapis Systems](./block3/tapis-systems.md)
+* [Intro to Tapis Systems](./block1/tapis-systems.md)
 
 ## Tapis Apps
-* [Intro to Apps](./block4/apps.md)
-  * [What is a Tapis(Agave) app?](./block4/apps.md#what-is-a-tapisagave-app)
-  * [Tapis(Agave) Apps service](./block4/apps.md#tapisagave-apps-service)
-  * [App Packaging](./block4/apps.md#app-packaging)
-  * [Application metadata](./block4/apps.md#application-metadata)
-  * [Registering App](./block4/apps.md#registering-an-app)
-  * [List Apps](./block4/apps.md#list-apps)
-  * [Managing App Permissions](./block4/apps.md#apps-permissions)
+* [Intro to Apps](./block2/apps.md)
+  * [What is a Tapis(Agave) app?](./block2/apps.md#what-is-a-tapisagave-app)
+  * [Tapis(Agave) Apps service](./block2/apps.md#tapisagave-apps-service)
+  * [App Packaging](./block2/apps.md#app-packaging)
+  * [Application metadata](./block2/apps.md#application-metadata)
+  * [Registering App](./block2/apps.md#registering-an-app)
+  * [List Apps](./block2/apps.md#list-apps)
+  * [Managing App Permissions](./block2/apps.md#apps-permissions)
 
 ## Tapis Jobs
-* [Intro to Tapis(Aloe) Jobs](./block4/jobs.md)
-  * [Tapis(Aloe) Jobs Service](./block4/jobs.md#tapisaloe-jobs-service)
-  * [Jobs Parameters](./block4/jobs.md#jobs-parameters)
-  * [Submitting a Job ](./block4/jobs.md#submitting-a-job)
-  * [Jobs List](./block4/jobs.md#jobs-list)
-  * [Jobs Status](./block4/jobs.md#jobs-status)
-  * [Jobs Output](./block4/jobs.md#jobs-output)
-  * [Jobs Notifications](./block4/jobs.md#jobs-notifications)
+* [Intro to Tapis(Aloe) Jobs](./block2/jobs.md)
+  * [Tapis(Aloe) Jobs Service](./block2/jobs.md#tapisaloe-jobs-service)
+  * [Jobs Parameters](./block2/jobs.md#jobs-parameters)
+  * [Submitting a Job ](./block2/jobs.md#submitting-a-job)
+  * [Jobs List](./block2/jobs.md#jobs-list)
+  * [Jobs Status](./block2/jobs.md#jobs-status)
+  * [Jobs Output](./block2/jobs.md#jobs-output)
+  * [Jobs Notifications](./block2/jobs.md#jobs-notifications)
 
-* [Link to Templates](./block4/templates)
+* [Link to Templates](./block2/templates)

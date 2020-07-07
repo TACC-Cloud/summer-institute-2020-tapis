@@ -1,0 +1,23 @@
+{
+  "id": "ajamthe.data.TACC.storage",
+  "name": "Storage system for TACC cloud storage on corral",
+  "status": "UP",
+  "type": "STORAGE",
+  "description": "Storage system for TACC cloud storage on corral",
+  "site": "www.tacc.utexas.edu",
+  "public": false,
+  "default": true,
+  "storage": {
+    "host": "data.tacc.utexas.edu",
+    "port": 22,
+    "protocol": "SFTP",
+    "rootDir": "/",
+    "homeDir": "/work/05278/ajamthe/stampede2",
+    "auth": {
+      "username": "ajamthe",
+      "publicKey": "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDAT7HO96J7OuqF0ezai7vXYpqEOvGkDRxmHdunNP8YlP6w3kYbByJqOCDUJ9UkypUOEm7BNihTdCYOqCZILlVkALzN6uJ9/zOnjFAKaHaVEdc65Aouc2V1Uhridi0SYJlYI02NfRr0bupUIRDRGbKZT3HksIyBwTm0S5CM7ykscjM61hNP/r/9zp+IxwcJhjU6WCPCIKT+LZPbQtrzmoJiryHnkfmxqOCZMhh4IcHjyI2fsjYHUmei38DDxBlxVN0Aj/NurPohowZa4YTVTEVxTaRxkcS8lFuElqFlAF5xpeZzazmXEiKo3Iz8X8kSM2WiCIb/sqLnQkgqcLzpkgmL ajamthe@gs-2.corral.tacc.utexas.edu",
+      "privateKey":"-----BEGIN RSA PRIVATE KEY-----\nMIIEpAIBAAKCAQEAwE+xzveiezrqhdHs2ou712KahDrxpA0cZh3bpzT/GJT+sN5G\nGwciajgg1CfVJMqVDhJuwTYoU3QmDqgmSC5VZAC8zeriff8zp4xQCmh2lRHXOuQK\nLnNldVIa4nYtEmCZWCNNjX0a9G7qVCEQ0RmymU9x5LCMgcE5tEuQjO8pLHIzOtYT\nT/6//c6fiMcHCYY1OlgjwiCk/i2T20La85qCYq8h55H5sajgmTIYeCHB48iNn7I2\nB1Jnot/Aw8QZcVTdAI/zbqz6IaMGWuGE1UxFcU2kcZHEvJRbhJahZQBecaXmc2s5\nlxIiqNyM/F/JEjNlogiG/7Ki50JIKnC86ZIJiwIDAQABAoIBAQCUZGpls7vSrvGM\ndSH4uV4motVsNzeCSQOi4GM/sKsuwrmMrNcXv/eUUt8yFdJoY1GE3EBOIoYXb0Z2\nhNWVWPtXASKvGhHO+39WR/TzMwxdlrinnpMkqLKfRs2r9VhuF8/7rLII/YIxHuz+\nIc2iK9weZKkTuA+TiBAIyU4vEdSJj/Y/jFLC3ufU46gTcp24jkXz0LEN5JghQCYX\nNIECa64dtJFXbC42bn2Oct4T5thsymXVoKrqltX9C3A8xrqUti+omm4RKOBIUnLI\n3Hj4rmLf/Yt7YwZ5YFjjFj2fM0RBi50GrbbmKGpThfcX1yhAqASquHeCYtl3z+X+\ndPBm0m/xAoGBAO0LgXTB4nBmnX1xqYVAtPHRHEATxbdmJdW48OvvbPFnEuuEvM+w\ncMTFDb2orlrTQcyTumubL9xbjgUcil0b/YmHISv8Q5dIzE8E5slflF744TOJhZhk\nBc19Mamzr7oRzMRwXuTkxpVHV7X0tZMXji7Na6x9cNQls7ZIUruXXxU/AoGBAM+w\ndN/saaD2f0eoMm22KwFJeEnI1S6qUu5hhlj3IlCx48Hu5gX6eP9IYVKBGiSEfTlE\nENDgIi04yxwwpD1IaHxAjWmlD2bUfdjcoUW3GyyNA85hyG4shVmoRK06q7H3tRi5\n54pOh+7MyY//MxB37PCsbsFTHX3TtA/piKc0Evy1AoGBANSSk9YzpK/tpd//1Oi1\nfU65mp7v3Ee6Z8WAYzUBce4N5A6m63dIn+glWkwxf6Hdf01JUUz8TvBKflKhJIeY\n+UWik6HRSH/bfbSDDb+aYgDFKZdBBTgCwp1jXuzzQWwYWEv1BXQ4oMjvwH1g5I/y\n+MOJ3bxChbMJ2F5n/yFQ/qibAoGADnNormv0rY55LLM3Twrt0xkZlYizzJttScjf\nYDFR4et+vW+x8ZiL8rdGjkcNWp0dWW6y/NWbiyn4d+2qf9kZ7AtRy5gAilceqogv\ncHpdGax2J1YGbCQM40AiByud5rQllaLZyXXNX4BARhSrqOmvQs+8pRbzZl3kmXbW\nW0v0RkECgYACA0o0XO3A2sShxt/Th6tKliVk5RQRUVoob+jmayV3M9M8S8Vyv8cN\ngqBgkhIsVKci7n9OkHfGJtUgGMDrx5GtXI9hYHYzom7gfkKxKCDTp3O2CViG+P+v\n6y0ElSm2DowPYUExubuOJVznhau6GoIB4MGYCFq0sFnwuwh6x0ZGHw==\n-----END RSA PRIVATE KEY-----\n",
+      "type": "SSHKEYS"
+    }
+  }
+}
