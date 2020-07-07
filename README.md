@@ -50,4 +50,9 @@ Presenters:
   * [Jobs Output](./block2/jobs.md#jobs-output)
   * [Jobs Notifications](./block2/jobs.md#jobs-notifications)
 
-* [Link to Templates](./block2/templates)
+* Link to Templates
+  * [Storage system](./block2/templates/storage_system.json)
+  * [Compute System](./block2/templates/compute_system.json)
+  * [App](./block2/templates/app.json)
+  * [Job](./block2/templates/job.json)
+  * [Wrapper](./block2/templates/wrapper.sh)
