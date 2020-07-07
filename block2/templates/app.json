@@ -1,33 +1,36 @@
 {
-  "name": "UPDATEUSERNAME.app.imageclassify",
-  "version": "1.0",
-  "label": "Image Classifier",
-  "shortDescription": "Classify an image using a small ImageNet model",
-  "longDescription": "",
-  "tags": [
-    "tensorflow",
-    "ImageNet"
-  ],
-  "deploymentSystem": "UPDATEUSERNAME.tacc.corral.storage",
-  "deploymentPath": "/home/UPDATEUSERNAME/applications/classifyApp-1.0/",
-  "templatePath": "wrapper.sh",
-  "testPath": "test/test.sh",
-  "executionSystem": "UPDATEUSERNAME.stampede2.execution",
+  "checkpointable": false,
+  "name": "{{ app.name }}",
+  "executionSystem": "replace with execution system name",
   "executionType": "HPC",
-  "helpURI": "https://github.com/tapis-project/hpc-in-the-cloud/",
+  "deploymentPath": "replace with deployment path",
+  "deploymentSystem": "replace with storage system name",
+  "helpURI": "",
+  "label": "{{ app.label }}",
+  "shortDescription": "{{ app.description }}",
+  "longDescription": "",
+  "modules": [
+    "load tacc-singularity/3.4.2"
+  ],
+  "ontology": [],
   "parallelism": "SERIAL",
-  "modules": ["load tacc-singularity/2.6.0"],
+  "tags": [],
+  "templatePath": "wrapper.sh",
+  "testPath": "tester.sh",
+  "version": "{{ app.version }}",
+  "defaultMaxRunTime": "00:30:00",
   "inputs": [],
-  "parameters": [{
+  "parameters": [
+  {
     "id": "imagefile",
     "details": {
       "label": "Image to classify",
-      "description": "",
+      "description":"",
       "argument": "--image_file ",
-      "showArgument": true
+      "showArgument":true
     },
     "semantics": {
-      "minCardinality": 1,
+      "minCardinality":1,
       "ontology": [
         "http://edamontology.org/format_3547"
       ],
@@ -40,8 +43,8 @@
       "type": "string",
       "visible": true
     }
-  },
-    {
+   },
+  {
     "id": "predictions",
     "details": {
       "label": "Number of predictions to return",
@@ -59,7 +62,7 @@
       "type": "number",
       "default": 5
     }
-  }],
-  "outputs": [],
-  "checkpointable": false
+  }
+  ],
+  "outputs": []
 }

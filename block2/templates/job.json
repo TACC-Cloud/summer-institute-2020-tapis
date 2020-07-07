@@ -1,12 +1,9 @@
 {
-  "name":"UPDATEUSERNAME.app.imageclassify",
+  "name":"UPDATEUSERNAME.job.imageclassify",
   "appId":"UPDATEAPPID",
-  "archive":true,
-  "archiveSystem":"UPDATESTORAGESYSTEM",
-  "memoryPerNode":"1",
+  "archive":false,
+  "inputs": {},
   "parameters": { 
     "imagefile": "https://texassports.com/images/2015/10/16/bevo_1000.jpg"
-    }
-  
-  
+    } 
 }

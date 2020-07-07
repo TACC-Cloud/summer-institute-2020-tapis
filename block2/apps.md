@@ -75,16 +75,15 @@ execution_system = {your private execution system on S2 created in this tutorial
 ```
 
 ## Step 3: Create the deployment folder on $WORK of Stampede2
-* In a separte terminal login to Stampede2 using your TACC credentials and TACC MFA token
+In a separte terminal login to Stampede2 using your TACC credentials and TACC MFA token
 * cd $WORK
-* cd to the work directory
 * mkdir classifyapp
-* Note this path, this is the deploymentPath in the app.json
+* Note this path, this is the deploymentPath that you will need to update in the app.json
 
 
 ## Step 4: Create a wrapper.sh
 In order to run your application, you will need to create a wrapper template that calls your executable code. For the sake of maintainability, it should be named something simple and intuitive like `wrapper.sh`. The singularity image to run the app is stored in a public location /work/05278/ajamthe/stampede2/public/gateways19-classifier.simg, make sure you **keep it as it is**
-* Create a file wrapper.sh in the deployment folder (on Stampede2) and copy the script below into the wrapper.sh file
+* Create a file wrapper.sh in the deployment folder (on Stampede2) and copy the script below into the wrapper.sh 
 
 ```
 #/bin/bash
@@ -97,7 +96,7 @@ singularity run /work/05278/ajamthe/stampede2/public/gateways19-classifier.simg 
 ## Step 5: Create a test script
 A test script named something simple and intuitive like `tester.sh`, along with any sample data needed to evaluating whether the application can be executed in a current command-line environment. It should exit with a status of 0 on success when executed on the command line. A simple way to create your test script is to set some sensible default values for your app's inputs and parameters and then call your wrapper template.
 
-* Create a file tester.sh in the same folder (on Stampede 2) and copy the script below into the tester.sh file
+* Create a file tester.sh in the deployment path (on Stampede 2) and copy the script below into the tester.sh file
 
 ```
 #!/bin/bash

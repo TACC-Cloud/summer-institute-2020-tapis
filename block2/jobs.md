@@ -2,12 +2,12 @@
 
 ### Tapis(Aloe) Jobs service
 The Tapis(Aloe) Jobs service is a basic execution service that allows you to run applications registered with the Tapis Apps service across multiple, distributed, heterogeneous systems through a common REST interface. <br/> This service manages all aspects of execution and job management from data staging, job submission, monitoring, output archiving, event logging, sharing, and notifications. 
-The Agave jobs service has been recently rearchitectured, to a new code-named Aloe, which provides improved reliability, scalability, performance and serviceability. More details on this new jobs service can be found in the [Jobs Tutorial](https://tacc-cloud.readthedocs.io/projects/agave/en/latest/agave/guides/jobs/introduction.html)
+The Agave jobs service has been rearchitectured, is called Tapis(Aloe), which provides improved reliability, scalability, performance and serviceability. More details on this new jobs service can be found in the [Jobs Tutorial](https://tacc-cloud.readthedocs.io/projects/agave/en/latest/agave/guides/jobs/introduction.html)
 
 
 ### Jobs Parameters 
 An example Job JSON defintion:
-```
+```json
 {
   "name":"UPDATEUSERNAME.job.imageclassify",
   "appId":"UPDATEAPPID",
@@ -41,7 +41,7 @@ $ tapis apps list
 ```
 
 Modify the job.json with the app id obtained with apps list
-```
+```json
 {
   "name":"UPDATEUSERNAME.job.imageclassify",
   "appId":"UPDATEAPPID",
@@ -82,8 +82,8 @@ tapis jobs output download {job id}
 
 ```
 
-With this command, you can see the job folder in pwd. <br/>
-You can cd in to the folder and cat the predictions.txt file. If the job ran successfully you should see following output
+With this command, you can see the job folder created in pwd. <br/>
+You can cd into the job folder and view the predictions.txt file. If the job ran successfully you should see following output in predictions.txt file
 ```
 >> Downloading inception-2015-12-05.tgz 100.0%
 Successfully downloaded inception-2015-12-05.tgz 88931400 bytes.
@@ -117,6 +117,6 @@ If you made it this far, you have successfully created a new app within a contai
 
 At this point, it would be a good idea to connect with other developers that are publishing apps and running workflows through Tapis by joining the Tapis API Slack channel: [tacc-cloud.slack.com](https://bit.ly/2XHYJEk)
 
-[BACK](https://tacc.github.io/pearc19-hpc-in-the-cloud/)
+[BACK](https://tacc.github.io/summer-institute-2020-tapis/)
 
 

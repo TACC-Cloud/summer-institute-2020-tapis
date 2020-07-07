@@ -6,18 +6,19 @@
   "description": "Execution system for Stampede2 ",
   "site": "www.tacc.utexas.edu",
   "executionType": "HPC",
-  "scratchDir": "/home1/0003/UPDATEUSERNAME/scratch",
-  "workDir": "/home1/0003/UPDATEUSERNAME/work",
+  "scratchDir": "/home1/dir/UPDATEUSERNAME/scratch",
+  "workDir": "/home1/dir/UPDATEUSERNAME/work",
   "login": {
     "host": "login1.stampede2.tacc.utexas.edu",
     "port": 22,
     "protocol": "SSH",
-    "scratchDir": "/home1/0003/UPDATEUSERNAME/scratch",
-    "workDir": "/home1/0003/UPDATEUSERNAME/work",
+    "scratchDir": "/home1/dir/UPDATEUSERNAME/scratch",
+    "workDir": "/home1/dir/UPDATEUSERNAME/work",
     "auth": {
       "username": "UPDATEUSERNAME",
-      "password": "UPDATEPASSWORD",
-      "type": "PASSWORD"
+      "publicKey":"paste public key here",
+      "privateKey":"paste private key here",
+      "type": "SSHKEYS"
     }
   },
   "storage": {
@@ -25,11 +26,12 @@
     "port": 22,
     "protocol": "SFTP",
     "rootDir": "/",
-    "homeDir": "/home1/0003/UPDATEUSERNAME",
+    "homeDir": "/home1/dir/UPDATEUSERNAME",
     "auth": {
-     "username": "UPDATEUSERNAME",
-      "password": "UPDATEPASSWORD",
-      "type": "PASSWORD"
+      "username": "UPDATEUSERNAME",
+      "publicKey":"paste public key here",
+      "privateKey":"paste private key here",
+      "type": "SSHKEYS"
     }
   },
   "maxSystemJobs": 100,
@@ -43,12 +45,11 @@
       "maxNodes": 128,
       "maxMemoryPerNode": "2GB",
       "maxProcessorsPerNode": 128,
-      "customDirectives":"-A UPDATEPROJECT -r UPDATERESERVATION",
       "maxRequestedTime": "24:00:00",
+      "customDirectives":"-A UPDATEPROJECT -r UPDATERESERVATION",
       "default": true
     }
   ],
   "environment": "",
   "startupScript": null
 }
-
