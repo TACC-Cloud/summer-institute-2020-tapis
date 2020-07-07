@@ -51,7 +51,7 @@ More details on the possible parameters for storage systems can be found in the 
 
 ### Hands-on 
 
-As hands on exercise, you will register a private storage system using ssh key pair that can be used to login to Stampede2. Your public key must be placed in the authorized keys file on Stampede2. Copy the above template in a new storage.json file on your pwd in the CLI terminal. Please make sure to change the username, home dir and auth block in the above template. It is recommended to generate one line private key using the command below to paste in the system definition.
+As hands on exercise, you will register a private storage system using ssh key pair that can be used to login to Stampede2. Your public key must be placed in the authorized keys file on Stampede2. Copy the above template in a new storage.json file on your pwd in the CLI terminal. Please make sure to change the username, homeDir and auth block in the above template. It is recommended to generate one line private key using the command below to paste in the system definition.
 
 ```
 awk -v ORS='\\n' '1' private_key_name
@@ -71,7 +71,7 @@ tapis systems list
 ```
 To make sure that the keys are configured correct, try to do a files listing using the system id
 ```
-tapis files list agave://{system id here}/
+tapis files list agave://{storage system id }/
 ```
 If the keys are configured correct, it should show you the files on your stampede2 work dir. This is an important step and must not be missed.
 
@@ -149,7 +149,7 @@ We covered what some of these keywords are in the storage systems section.  Belo
 * **startupScript** - Path to a script that will be run prior to execution of any command on this system. The path will be a standard path on the remote system. A limited set of system macros are supported in this field. They are rootDir, homeDir, systemId, workDir, and homeDir. The standard set of runtime job attributes are also supported. Between the two set of macros, you should be able to construct distinct paths per job, user, and app. Any environment variables defined in the system description will be added after this script is sourced. If this script fails, output will be logged to the .agave.log file in your job directory. Job submission will still continue regardless of the exit code of the script.
 
 Complete reference information is located here:
-[https://tacc-cloud.readthedocs.io/projects/agave/en/latest/agave/guides/systems/introduction.html]
+[Systems](https://tacc-cloud.readthedocs.io/projects/agave/en/latest/agave/guides/systems/introduction.html)
 
 ### Hands-on 
 
@@ -168,10 +168,10 @@ tapis systems list
 
 If you want to view just the systems 
 ```
-tapis systems show -f json system_name
+tapis systems show -f json {compute system id}
 
 ```
 Just like you did files listing for storage system, list files on execution system to make sure the keys are set up correct
 ```
-tapis files list agave://compute system id/
+tapis files list agave://{compute system id}/
 ```
