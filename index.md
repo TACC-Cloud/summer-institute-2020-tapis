@@ -52,7 +52,7 @@ Presenters:
   * [Jobs Output](./block2/jobs.md#jobs-output)
   * [Jobs Notifications](./block2/jobs.md#jobs-notifications)
 
-* Link to Templates
+## Link to Templates
   * [Storage system](./block2/templates/storage_system.json)
   * [Compute System](./block2/templates/compute_system.json)
   * [App](./block2/templates/app.json)
