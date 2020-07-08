@@ -22,7 +22,7 @@
     }
   },
   "storage": {
-    "host": "login1.stampede2.tacc.utexas.edu",
+    "host": "stampede2.tacc.utexas.edu",
     "port": 22,
     "protocol": "SFTP",
     "rootDir": "/",

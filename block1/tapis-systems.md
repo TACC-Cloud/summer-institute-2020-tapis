@@ -92,7 +92,7 @@ Execution systems in Tapis are very similar to storage systems.  They just have 
   "scratchDir": "/home1/dir/UPDATEUSERNAME/scratch",
   "workDir": "/home1/dir/UPDATEUSERNAME/work",
   "login": {
-    "host": "login1.stampede2.tacc.utexas.edu",
+    "host": "stampede2.tacc.utexas.edu",
     "port": 22,
     "protocol": "SSH",
     "scratchDir": "/home1/dir/UPDATEUSERNAME/scratch",
@@ -105,7 +105,7 @@ Execution systems in Tapis are very similar to storage systems.  They just have 
     }
   },
   "storage": {
-    "host": "login1.stampede2.tacc.utexas.edu",
+    "host": "stampede2.tacc.utexas.edu",
     "port": 22,
     "protocol": "SFTP",
     "rootDir": "/",
