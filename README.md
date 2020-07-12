@@ -1,4 +1,4 @@
-## TACC Summer Institute Tapis Day
+## TACC Summer Institute: Tapis Day
 
 ## Part 1: Welcome and Background
 * [Welcome](./welcome/intro.md)
@@ -9,7 +9,7 @@
 * 10:15AM - Tapis Introduction
 * 10:30AM - Introduction to Tapis CLI
 * 11:30AM - Lunch
-* 12:30pm - Registering Tapis Systems
+* 12:00PM - Registering Tapis Systems
 * 1:30PM  - Break
 * 2:00PM  - Registering Tapis Apps
 * 2:30PM  - Launching Tapis Jobs
