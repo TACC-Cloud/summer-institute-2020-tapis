@@ -176,6 +176,6 @@ Just like you did files listing for storage system, list files on execution syst
 tapis files list agave://{compute system id}/
 ```
 
-Conngratulations! You successfully registered your private systems, next part of the tutorial we will talk about registering applications with Tapis.
+Congratulations! You have successfully registered private systems, in the next part of the tutorial we will talk about registering applications with Tapis.
 
 [NEXT-> APPS](./apps.md)

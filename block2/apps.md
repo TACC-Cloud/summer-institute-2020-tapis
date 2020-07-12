@@ -21,7 +21,7 @@ The rest of this tutorial explains details about how to package your Tapis(Agave
 ### Create Private App: Image Classifier 
 Tapis(Agave) apps are bundled into a directory and organized in a way that Tapis(Aloe) jobs can properly invoke it. Tapis(Aloe) is the new code name for rearchitectured Agave Jobs service. We will discuss more on this in the next part of the tutorial. 
 
-## Step 1: Initialize the app directory with following command
+## Step 1: Initialize the app directory with following CLI command
 ```
 $ tapis app init --app-label classifier --app-description "Image classifier" --app-version 0.0.1 classifier_app
 ```
@@ -70,15 +70,15 @@ A brief summary of the files are as follows:
 By default, the fields are populated by some of the flags specified on the command line or picked up from the environment. 
 Set the following and unncomment these two lines:
 ```
-deployment_system = {your private storage system created in this tutorial}
-execution_system = {your private execution system on S2 created in this tutorial}
+deployment_system = {input your private storage system created in this tutorial}
+execution_system = {input your private execution system created in this tutorial}
 ```
 
-## Step 3: Create the deployment folder on $WORK of Stampede2
+## Step 3: Create a deployment folder on $WORK of Stampede2
 In a separte terminal login to Stampede2 using your TACC credentials and TACC MFA token
 * cd $WORK
 * mkdir classifyapp
-* Note this path, this is the deploymentPath that you will need to update in the app.json
+* Note this path for later use. This is the deploymentPath that you will need to update in the app.json
 
 
 ## Step 4: Create a wrapper.sh
