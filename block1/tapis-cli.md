@@ -1,178 +1,265 @@
 
 Tutorial: Getting Started with Tapis CLI
 ===============================================
-The following instructions will guide you through setting up Tapis CLI.  As an aside, everything we do today can also be accomplished from a command line interface or by directly calling API endpoints.  
+The following instructions will guide you through setting up Tapis CLI (command line interface).  As an aside, everything we do today can also be accomplished from a command line interface or by directly calling API endpoints.  
 
 The Tapis CLI commands all respond with help for -h and return back information on the parameters that can be passed.  
 
-Need help?  Ask your questions using the [TACC Institutes Slack Channel](https://app.slackcom/client/T015E2VMTLH/C015RUFEYBH)
+Need help?  Ask your questions using the [TACC Institutes Slack Channel](https://app.slack.com/client/T015E2VMTLH/C015RUFEYBH)
 
 Initial Requirements
 ===============================================
 
 Before getting started, you need to have the following:
-* A TACC Account 
-* SSH access to the Stampede 2 compute cluster and an allocation.
-* Familiarity with [editing text files](https://www.nano-editor.org/dist/v2.7/nano.html) and [working at the command line](http://www.gnu.org/software/bash/manual/bashref.html#Introduction)
+* A TACC Account
+* Docker installed on your local computer
+* Familiarity with [working at the command line](http://www.gnu.org/software/bash/manual/bashref.html#Introduction)
 
 Any questions?  Join the [TACC Institute SLACK CHANNEL](https://app.slack.com/client/T015E2VMTLH/C015RUFEYBH) and ask away.
 
 
 Command Line Access
-===================
+===============================================
 
-Open a terminal in your laptop and install Tapis CLI.
+**Goal of this section:** Open a terminal on your machine and install Tapis CLI.
 
-Tapis has a downloadable set of command line tools that make it easier to work with the API from the shell. Using these scripts is generally easier than hand-crafting cURL commands, but if you prefer that route, consult the [Tapis API Documentation](https://tacc-cloud.readthedocs.io/en/latest/). We include these scripts in the training virtual machines and supplement them with additional support scripts, example files, and documents.
+Tapis has a downloadable set of command line tools that make it easier to work with the API from the shell. Using the CLI is easier than hand-crafting cURL commands, but if you prefer that route, consult the [Tapis API Documentation](https://tacc-cloud.readthedocs.io/en/latest/).
+
+Using docker, we'll download and run an environment which allows the use of the `tapis` command, which is what we'll be using to communicate with Tapis.
+```
+docker run --rm -it -v ${PWD}:/work -v ${HOME}/.tapis:/root/.agave tacc/tapis-cli:latest bash
+```
+After waiting for the image to download, do you see the cow? (moo in the chat if you do) ```🐮 tapis-cli:alpha@77c693a9042b#```
+
+We'll know Tapis CLI installed correctly when the `tapis -h` command returns some information about the application:
 
 ```
-docker run --rm -it -v ${PWD}:/work -v ${HOME}/.agave:/root/.agave \
-      tacc/tapis-cli-ng:latest /bin/bash
+> tapis -h
+usage: tapis [--version] [-v | -q] [--log-file LOG_FILE] [-h] [--debug]
+
+Tapis CLI: Command line tools to support the TACC Tapis platform. For support
+contact "TACC Help" <cli-help@tacc.cloud>
+
+optional arguments:
+  --version            show program's version number and exit
+  -v, --verbose        Increase verbosity of output. Can be repeated.
+  -q, --quiet          Suppress output except warnings and errors.
+  --log-file LOG_FILE  Specify a file to log output. Disabled by default.
+  -h, --help           Show help message and exit.
+  --debug              Show tracebacks on errors.
+
+Commands:
+  apps create    Create a new app
+  apps disable   Disable usage of an app
+  apps enable    Restore usage for an app if disabled
+  apps history   List history for an specific app
+  apps list      List the Apps catalog
+  apps pems grant  Grant permissions on an app to a user
+...
 ```
+
+(Did you get this working? Answer the poll in our Slack channel and our proctors can help you through it!)
+
 
 Authentication
-----------------
+===============================================
 
-Tapis has robust Authentication/Authorization pathways - we could easliy spend an hour or more discussing them, but will keep our focus simple for this tutorial.
+Tapis has robust Authentication/Authorization pathways - we could spend an hour or more discussing them, but will keep our focus simple for this tutorial.
 
 The Tapis API uses OAuth 2 for managing authentication and authorization. OAuth 2 is an open standard for access delegation, commonly used as a way for Internet users to grant websites or applications access to their information on other websites but without giving them the passwords.
 
-Just understand that instead of passing a username and password every time we want to make an authenticated/authorized request to the Tapis APIs we will be usig an Access Token that has a defined expiration - this keeps our credentials safe and ensures that if someone where to obtain the token it could not be used forever.
+Just understand that instead of passing a username and password every time we want to make an authenticated/authorized request to the Tapis APIs, we will be using an Access Token that has a defined expiration - this keeps our credentials safe and ensures that if someone where to obtain the token it could not be used forever.
 
-Run the following in the CLI
+Run the following in the CLI and expect to get the following message
+
 ```
->auth-check
-Please run /agave-cli/bin/tenants-init to initialize your client before attempting to interact with the APIs.
+> tapis auth show
+Auth configuration was not loaded. Try running "tapis auth init".
 ```
+
 We will see that we have to initialize some things before we can use Tapis.
 
-Initialize the CLI
+Initialize an API client using the CLI
+===============================================
+
+Upon installation, you must initialize your Tapis CLI
+
+You can initialize the TACC tenant by running ```tapis auth init```:
+
+**Note:** The `tapis auth init` command creates a Tapis client and requests an API token. The TACC tenant, client, and API token information will be placed into a cache in ~/.tapis/current. This is the file that Tapis CLI will look for when making API calls so that you don't have to enter those parameters for every call.
+
+```
+> tapis auth init
+
+Use of Tapis requires acceptance of the TACC Acceptable Use Policy 
+which can be found at https://portal.tacc.utexas.edu/tacc-usage-policy
+
+Do you agree to abide by this AUP? (type 'y' or 'n' then Return) y
+
+Use of Tapis requires acceptance of the Tapis Project Code of Conduct
+which can be found at https://tapis-project.org/code-conduct
+
+Do you agree to abide by this CoC? (type 'y' or 'n' then Return) y
+
+To improve our ability to support Tapis and the Tapis CLI, we would like to
+collect your IP address, operating system and Python version. No personally-
+identifiable information will be collected. This data will only be shared in
+aggregate form with funders and Tapis platform stakeholders.
+
+Do you consent to this reporting? [Y/n]: Y
+```
+After answering the yes or no questions, you should see `Enter a tenant name`. For those who may not know, a tenant is... TODO: What is a tenant?
+
+Hit the enter key to select the default `tacc.prod` tenant, which is the tenant we'll be using for the remainder of the day.
+
+```
++---------------+--------------------------------------+----------------------------------------+
+|      Name     |             Description              |                  URL                   |
++---------------+--------------------------------------+----------------------------------------+
+|      3dem     |             3dem Tenant              |         https://api.3dem.org/          |
+|   agave.prod  |         Agave Public Tenant          |      https://public.agaveapi.co/       |
+|  araport.org  |               Araport                |        https://api.araport.org/        |
+|     bridge    |                Bridge                |     https://api.bridge.tacc.cloud/     |
+|   designsafe  |              DesignSafe              |    https://agave.designsafe-ci.org/    |
+|  iplantc.org  |         CyVerse Science APIs         |       https://agave.iplantc.org/       |
+|      irec     |              iReceptor               | https://irec.tenants.prod.tacc.cloud/  |
+|    portals    |            Portals Tenant            |  https://portals-api.tacc.utexas.edu/  |
+|      sd2e     |             SD2E Tenant              |         https://api.sd2e.org/          |
+|      sgci     | Science Gateways Community Institute |        https://sgci.tacc.cloud/        |
+|   tacc.prod   |                 TACC                 |      https://api.tacc.utexas.edu/      |
+| vdjserver.org |              VDJ Server              | https://vdj-agave-api.tacc.utexas.edu/ |
++---------------+--------------------------------------+----------------------------------------+
+Enter a tenant name [tacc.prod]: [ENTER]
+tacc.prod username: your_tacc_username
+tacc.prod password for your_tacc_username: [PASSWORD]
+
+Container registry access:
+--------------------------
+Registry Url [https://index.docker.io]: [ENTER]
+Registry Username: n/a
+Registry Password: n/a
+Registry Namespace: n/a
+
+Git server access:
 ------------------
-
-The first time you install the CLI tools on a computer, you need to initialize it.
-You can initialize the TACC tenant by runnning:
-
-```
-> auth-session-init
-ID                   NAME                                     URL
-vdjserver.org        VDJ Server                               https://vdj-agave-api.tacc.utexas.edu/
-sgci                 Science Gateways Community Institute     https://sgci.tacc.cloud/
-iplantc.org          CyVerse Science APIs                     https://agave.iplantc.org/
-sd2e                 SD2E Tenant                              https://api.sd2e.org/
-3dem                 3dem Tenant                              https://api.3dem.org/
-designsafe           DesignSafe                               https://agave.designsafe-ci.org/
-araport.org          Araport                                  https://api.araport.org/
-tacc.prod            TACC                                     https://api.tacc.utexas.edu/
-irec                 iReceptor                                https://irec.tenants.prod.tacc.cloud/
-agave.prod           Agave Public Tenant                      https://public.agaveapi.co/
-bridge               Bridge                                   https://api.bridge.tacc.cloud/
-portals              Portals Tenant                           https://portals-api.tacc.utexas.edu/
-
-Please specify the ID for the tenant you wish to interact with: tacc.prod
-Creating a client...
-API username: train100
-API password:
-Created client 5c8c91edb474 - Autogenerated client
-Getting oauth bearer tokens...
-```
-Select the 'tacc.prod' tenant and then use the username and password provided for this tutorial.
-
-The 'auth-session-init' command creates a Tapis client and then request an API token and will then place the TACC tenant,client and API token information into a cache in ~/.agave/current. This is the file that the CLI tools will look for when making API calls so that you don't have to enter those parameters for every call.
-
-
-Creating a Client 
-----------------
-The Tapis API uses OAuth 2 for managing authentication and authorization. Before you work with Tapis, you must create an OAuth client application and record the API keys that are returned. This is a one-time action per machine that you use the CLI on and the 'auth-session-init' can take care of this.  In the event you need to create your own client you can pass additional parameters to the 'auth-session-init' command.  For instance if we want to make a new client.
-
-```
-> auth-session-init -h
-usage: auth-session-init [-h] [-c CACHEDIR] [--tenants TENANTS] [-t TENANT]
-                         [-u USERNAME] [-N CLIENT_NAME] [-D DESCRIPTION]
-
-Create a new Agave oauth client
-
-optional arguments:
-  -h, --help            show this help message and exit
-  -c CACHEDIR, --cachedir CACHEDIR
-                        Directory to save confiurations in.
-  --tenants TENANTS     URL with tenants listings.
-  -t TENANT, --tenant TENANT
-                        Tenant id for session.
-  -u USERNAME, --username USERNAME
-                        Session username.
-  -N CLIENT_NAME, --name CLIENT_NAME
-                        Name of client.
-  -D DESCRIPTION, --description DESCRIPTION
-                        Description of client.
-
-> auth-session-init -N myclient1
-Client 'myclient1' is not saved in /root/.agave, so we will create it...
-Creating a client...
-API password:
-Created client myclient1 - Autogenerated client
-Getting oauth bearer tokens...
-API password:
+Git Username: n/a
+Learn about github.com personal access tokens:
+https://help.github.com/en/github/authenticating-to-github/creating-a-personal-access-token-for-the-command-line
+Git Token: n/a
+Git Namespace [n/a]: n/a
++--------------------+--------------------------------------+
+| Field              | Value                                |
++--------------------+--------------------------------------+
+| tenant_id          | tacc.prod                            |
+| username           | your_tacc_username                   |
+| client_name        | _cli-tacc.prod-username-a6fb810bd43e |
+| api_key            | 0fvGYkdummypTsVASlpBdummy48a         |
+| access_token       | 1234345636b1106698f581erhfg4d3a8     |
+| expires_at         | Mon Jul 13 21:19:26 2020             |
+| verify             | True                                 |
+| registry_url       | https://index.docker.io              |
+| registry_username  | n/a                                  |
+| registry_password  | n*a                                  |
+| registry_namespace | n/a                                  |
+| git_username       | n/a                                  |
+| git_token          | n*a                                  |
+| git_namespace      | n/a                                  |
++--------------------+--------------------------------------+
 ```
 
-*Note:* The -N flag allows you to specify a machine-readable name for your client and -D provides the description. 
+Behold the glorious box that is your initialized API client!
 
-You will need access to the ```consumerKey``` and ```consumerSecret``` values when setting up on other hosts. So, please take a moment and record *client_name*, *consumerKey*, and *consumerSecret* somewhere safe. If you lose these values, you can create a new instance of the client by deleting the old client (clients-delete CLIENT_NAME) and creating it again (or create a new client with a different name).
+Run ```tapis auth show``` to see your newly minted client's access token and refresh token
 
- OAuth 2 API authentication token
-----------------
-
-Tokens are a form of short-lived, temporary authenticiation and authorization used in place of your username and password. To interact with Tapis, you will need to acquire one. Each Tapis token, typically, expires after 4 hours, but can easily be refreshed.
-
-On a host where you have configured a Tapis OAuth2 client already, the CLI command to get a new token is:
+(Talk about token expiration and auto-refreshing in the CLI)
 
 ```
-> auth-tokens-create -v
-API password:
+tapis auth show
++---------------+----------------------------------+
+| Field         | Value                            |
++---------------+----------------------------------+
+| tenant_id     | tacc.prod                        |
+| username      | your_tacc_username                         |
+| api_key       | 0fvGYkdummypTsVASlpBdummy48a     |
+| access_token  | 1234345636b1106698f581erhfg4d3a8 |
+| expires_at    | Mon Jul 13 21:19:26 2020         |
+| refresh_token | 938fb1c860a97f5bjd7239532eef4e5d |
++---------------+----------------------------------+
 ```
 
-You will then be prompted to enter your *API password*. **Type your user password**.  At this point, you should receive an affirmation of success in your terminal that resembles this one:
 
+To see a list of all your systems:
 ```
-Token for tacc.prod:train100 successfully refreshed and cached for 13605 seconds
-{
-  "scope": "default",
-  "token_type": "bearer",
-  "expires_in": 13605,
-  "refresh_token": "fd38287337b5312933eea555555",
-  "access_token": "f940624e12e7186117443ee555555"
-}
+> tapis systems list
++-----------------------------------+-------------------------------------------------+-----------+---------+
+| id                                | name                                            | type      | default |
++-----------------------------------+-------------------------------------------------+-----------+---------+
+| your_pre_existing_system_1        | My pre-existing system                          | EXECUTION | False   |
+| your_pre_existing_system_2        | Another pre-existing system                     | EXECUTION | False   |
++-----------------------------------+-------------------------------------------------+-----------+---------+
 ```
-
-NOTE that the CLI will cache the new access and refresh tokens in the ~/.agave/current file.
-
-## Refreshing your token
-
-This tutorial won't take very long, but if you are interrupted and come back later, you might find your token has expired. You can always refresh a token as follows:
-
-```> auth-tokens-refresh -v```
-
-A successful refresh should appear:
-
-```
-Token for tacc.prod:train100 successfully refreshed and cached for 14400 seconds
-{
-  "scope": "default",
-  "token_type": "bearer",
-  "expires_in": 14400,
-  "refresh_token": "b4b5c3e5b7c77862af8088c4a92c6a25",
-  "access_token": "561335afda3b35654c84dc6d483f7ccf"
-}
-```
-
-This topic is covered in great detail at the Tapis [Authorization Guide](https://tacc-cloud.readthedocs.io/projects/agave/en/latest/agave/guides/authorization/introduction.html)
-
-NOTE that most CLI commands will attempt to do a token refresh on your behalf if the access token is expired.
 
 ## Command Help
 
+Please read the [Tapis CLI documentation](https://tapis-cli.readthedocs.io/en/latest/) for more in depth documentation.
+
 Note that all the CLI commands take the '-h' flag to display a short description and the accept parameters for the command.
 
-
-```python
-
+General Tapis help:
 ```
+> tapis -h
+usage: tapis [--version] [-v | -q] [--log-file LOG_FILE] [-h] [--debug]
+
+Tapis CLI: Scripting interface to the Tapis platform. Documentation at https://tapis-cli.rtfd.io/. For support contact "TACC Help" <help@tacc.cloud>
+
+optional arguments:
+  --version            show program's version number and exit
+  -v, --verbose        Increase verbosity of output. Can be repeated.
+  -q, --quiet          Suppress output except warnings and errors.
+  --log-file LOG_FILE  Specify a file to log output. Disabled by default.
+  -h, --help           Show help message and exit.
+  --debug              Show tracebacks on errors.
+
+Commands:
+  actors aliases create  Add an Alias for an Actor
+  actors aliases delete  Delete an Actor Alias
+  actors aliases list  List all Actor Aliases
+  actors aliases show  Show details for an Actor Alias
+  actors create  Create an Actor
+  actors delete  Delete an Actor
+```
+
+Help regarding a specific command:
+```
+> tapis auth show -h
+usage: tapis auth show [-h] [-f {json,shell,table,value,yaml}] [-c COLUMN] [--noindent] [--prefix PREFIX] [--max-width <integer>] [--fit-width] [--print-empty]
+
+Show current Tapis authentication configuration
+
+optional arguments:
+  -h, --help            show this help message and exit
+
+output formatters:
+  output formatter options
+
+  -f {json,shell,table,value,yaml}, --format {json,shell,table,value,yaml}
+                        the output format, defaults to table
+  -c COLUMN, --column COLUMN
+                        specify the column(s) to include, can be repeated to show multiple columns
+
+json formatter:
+  --noindent            whether to disable indenting the JSON
+
+shell formatter:
+  a format a UNIX shell can parse (variable="value")
+
+  --prefix PREFIX       add a prefix to all variable names
+
+table formatter:
+  --max-width <integer>
+                        Maximum display width, <1 to disable. You can also use the CLIFF_MAX_TERM_WIDTH environment variable, but the parameter takes precedence.
+  --fit-width           Fit the table to the display width. Implied if --max-width greater than 0. Set the environment variable CLIFF_FIT_WIDTH=1 to always enable
+  --print-empty         Print empty table if there is no data to show.
+```
+
+If you have any additional questions or are having issues, please post it in our [Slack channel](https://app.slack.com/client/T015E2VMTLH/C015RUFEYBH)
