@@ -1,6 +1,6 @@
 {
   "id": "UPDATEUSERNAME.stampede2.execution",
-  "name": "Execution system for Stampede2",
+  "name": "Execution system S2",
   "status": "UP",
   "type": "EXECUTION",
   "description": "Execution system for Stampede2 ",

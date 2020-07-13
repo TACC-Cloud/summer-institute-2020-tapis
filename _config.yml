@@ -11,11 +11,11 @@ nav:
   - Intro to Tapis and The Command Line Interface:
     - Intro to Tapis(Agave): block1/tapis-intro
     - Intro to Tapis CLI: block1/tapis-cli
-  - Intro to Systems:
+  - Tapis Systems:
     - Intro to Tapis Systems: block1/tapis-systems
-  - Intro to Apps:
-    - Intro to Apps: block2/apps
-  - Intro to Jobs:
+  - Tapis Apps:
+    - Intro to Tapis Apps: block2/apps
+  - Tapis Jobs:
     - Intro to Tapis Jobs with Aloe: block2/jobs
 
 

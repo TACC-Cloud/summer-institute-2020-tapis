@@ -68,7 +68,7 @@ Tapis has robust Authentication/Authorization pathways - we could spend an hour 
 
 The Tapis API uses OAuth 2 for managing authentication and authorization. OAuth 2 is an open standard for access delegation, commonly used as a way for Internet users to grant websites or applications access to their information on other websites but without giving them the passwords.
 
-Just understand that instead of passing a username and password every time we want to make an authenticated/authorized request to the Tapis APIs, we will be using an Access Token that has a defined expiration - this keeps our credentials safe and ensures that if someone where to obtain the token it could not be used forever.
+Understand that instead of passing a username and password every time we want to make an authenticated/authorized request to the Tapis APIs, we will be using an Access Token that has a defined expiration - this keeps our credentials safe and ensures that if someone where to obtain the token it could not be used forever.
 
 Run the following in the CLI and expect to get the following message
 
@@ -77,7 +77,7 @@ Run the following in the CLI and expect to get the following message
 Auth configuration was not loaded. Try running "tapis auth init".
 ```
 
-We will see that we have to initialize some things before we can use Tapis.
+We will see that we have to initialize a client before we can use Tapis CLI.
 
 Initialize an API client using the CLI
 ===============================================
@@ -86,7 +86,7 @@ Upon installation, you must initialize your Tapis CLI
 
 You can initialize the TACC tenant by running ```tapis auth init```:
 
-**Note:** The `tapis auth init` command creates a Tapis client and requests an API token. The TACC tenant, client, and API token information will be placed into a cache in ~/.tapis/current. This is the file that Tapis CLI will look for when making API calls so that you don't have to enter those parameters for every call.
+**Note:** The `tapis auth init` command creates a Tapis client and requests an API token. The TACC tenant, client, and API token information will be placed into a cache in `~/.tapis/current`. This is the file that Tapis CLI will look for when making API calls so that you don't have to enter those parameters for every call.
 
 ```
 > tapis auth init
@@ -179,7 +179,7 @@ tapis auth show
 | Field         | Value                            |
 +---------------+----------------------------------+
 | tenant_id     | tacc.prod                        |
-| username      | your_tacc_username                         |
+| username      | your_tacc_username               |
 | api_key       | 0fvGYkdummypTsVASlpBdummy48a     |
 | access_token  | 1234345636b1106698f581erhfg4d3a8 |
 | expires_at    | Mon Jul 13 21:19:26 2020         |

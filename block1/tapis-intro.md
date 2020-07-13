@@ -16,11 +16,11 @@ All this is hosted for you, you don't have to stand up your own servers to acces
 
 ### A Number of Science Gateways and projects leverage Tapis:
 
-* [Cyverse](https://cyerse.org)
+* [Cyverse](https://cyverse.org)
 * [Design-safe](https://www.designsafe-ci.org/#!#research)
 * [iMicrobe](https://www.imicrobe.us)
 * [VDJ](https://vdjserver.org/)
-* [Ike Wai](ikewai.org)
+* [Ike Wai](http://ikewai.org)
 
 All these gateways leverage Tapis to provide access to data, software and compute resources.
 ​
@@ -43,5 +43,5 @@ You don't have to do a lot of complex things to use Tapis.  If you just want som
 ### Full Tapis Documentation
 ​
 Full documentation and guides for using Tapis can be found here:
-[https://tacc-cloud.readthedocs.io/projects/agave/en/latest/index.html]
+[Tapis](https://tacc-cloud.readthedocs.io/projects/agave/en/latest/index.html)
 ​
