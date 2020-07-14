@@ -49,9 +49,9 @@ Storage systems tell Tapis where data resides.  You can store files for running 
 
 More details on the possible parameters for storage systems can be found in the [Tapis Storage System documentation](https://tacc-cloud.readthedocs.io/projects/agave/en/latest/agave/guides/systems/systems-storage.html).
 
-### Hands-on Exercises
+## Hands-on Exercises
 
-# Keys retrival
+### Keys retrival
 Before you start working on the storage system definition please make sure that your public key is placed in the authorized keys file on Stampede2. <br/>
 Keep the public key and private key handy, these are required for the system definition. To retrive keys, login to Stampede2, go to .ssh folder and copy your public key into a notepad. It is recommended to generate one line private key using the command below. Save this to a notepad as well.
 
@@ -60,7 +60,7 @@ awk -v ORS='\\n' '1' private_key_name
 
 ```
 
-# System definition
+### System definition
 
 Copy the above system definition template in a new storage.json file on your present working directory on the CLI terminal. Please make sure to change the username, homeDir and auth block in the above template. Copy the one liner keys in the auth block. Once your system definition is ready, use the command below to register the system.
 
@@ -83,7 +83,7 @@ tapis files list agave://{storage system id }/
 If the keys are configured correct, it should show you the files on your stampede2 work dir. This is an important step and must not be missed.
 
 ---
-### Tapis Execution Systems
+## Tapis Execution Systems
 
 Execution systems in Tapis are very similar to storage systems.  They just have additional information for how to launch jobs.  In this example, we are using the Stampede2 HPC system, so we have to give scheduler and queue information.  This system description is longer than the storage definition due to logins, queues, scratch systems definitions.
 
@@ -158,7 +158,7 @@ We covered what some of these keywords are in the storage systems section.  Belo
 Complete reference information is located here:
 [Systems](https://tacc-cloud.readthedocs.io/projects/agave/en/latest/agave/guides/systems/introduction.html)
 
-### Hands-on 
+## Hands-on 
 
 As a hands on exercise, register the Stampede2 HPC as a execution system using the Tapis-CLI using the above JSON template. Copy the above template in new compute.json file on your pwd in the CLI terminal. Make changes into fields id, scratchDir, workDir,homeDir, auth stanza and customDirectives. Use your training project name and resevation name in customDirectives. 
 
