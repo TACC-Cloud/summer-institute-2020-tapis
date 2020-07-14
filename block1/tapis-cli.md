@@ -110,7 +110,7 @@ Do you consent to this reporting? [Y/n]: Y
 ```
 After answering the yes or no questions, you should see `Enter a tenant name`. For those who may not know, a tenant is... TODO: What is a tenant?
 
-Hit the enter key to select the default `tacc.prod` tenant, which is the tenant we'll be using for the remainder of the day.
+We will be using the `portals` tenant, so type that as the tenant name and press enter. 
 
 ```
 +---------------+--------------------------------------+----------------------------------------+
@@ -129,7 +129,7 @@ Hit the enter key to select the default `tacc.prod` tenant, which is the tenant 
 |   tacc.prod   |                 TACC                 |      https://api.tacc.utexas.edu/      |
 | vdjserver.org |              VDJ Server              | https://vdj-agave-api.tacc.utexas.edu/ |
 +---------------+--------------------------------------+----------------------------------------+
-Enter a tenant name [tacc.prod]: [ENTER]
+Enter a tenant name [tacc.prod]: portals
 tacc.prod username: your_tacc_username
 tacc.prod password for your_tacc_username: [PASSWORD]
 
@@ -150,9 +150,9 @@ Git Namespace [n/a]: n/a
 +--------------------+--------------------------------------+
 | Field              | Value                                |
 +--------------------+--------------------------------------+
-| tenant_id          | tacc.prod                            |
+| tenant_id          | portals                              |
 | username           | your_tacc_username                   |
-| client_name        | _cli-tacc.prod-username-a6fb810bd43e |
+| client_name        | _cli-portals-username-a6fb810bd43e   |
 | api_key            | 0fvGYkdummypTsVASlpBdummy48a         |
 | access_token       | 1234345636b1106698f581erhfg4d3a8     |
 | expires_at         | Mon Jul 13 21:19:26 2020             |
@@ -178,7 +178,7 @@ tapis auth show
 +---------------+----------------------------------+
 | Field         | Value                            |
 +---------------+----------------------------------+
-| tenant_id     | tacc.prod                        |
+| tenant_id     | portals                          |
 | username      | your_tacc_username               |
 | api_key       | 0fvGYkdummypTsVASlpBdummy48a     |
 | access_token  | 1234345636b1106698f581erhfg4d3a8 |
