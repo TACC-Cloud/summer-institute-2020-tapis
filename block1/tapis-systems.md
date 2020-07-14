@@ -180,4 +180,4 @@ tapis files list agave://{compute system id}/
 
 Congratulations! You have successfully registered private systems, in the next part of the tutorial we will talk about registering applications with Tapis.
 
-[NEXT-> APPS](./apps.md)
+[NEXT-> APPS](/block2/apps.md)
