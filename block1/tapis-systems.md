@@ -51,6 +51,8 @@ More details on the possible parameters for storage systems can be found in the 
 
 ### Hands-on 
 
+TODO: maybe explain more about how to get the keys? 
+
 As hands on exercise, you will register a private storage system using SSH key pair that can be used to login to Stampede2. Your public key must be placed in the authorized keys file on Stampede2. Copy the above template in a new storage.json file on your pwd in the CLI terminal. Please make sure to change the username, homeDir and auth block in the above template. It is recommended to generate one line private key using the command below to paste in the system definition.
 
 ```
