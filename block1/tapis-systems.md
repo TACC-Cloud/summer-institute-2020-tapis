@@ -53,7 +53,7 @@ More details on the possible parameters for storage systems can be found in the 
 
 ### Keys retrival
 Before you start working on the storage system definition please make sure that your public key is placed in the authorized keys file on Stampede2. <br/>
-Keep the public key and private key handy, these are required for the system definition. To retrive keys, login to Stampede2, go to .ssh folder and copy your public key into a notepad. It is recommended to generate one line private key using the command below. Save this to a notepad as well.
+Keep the public key and private key handy, these are required for crafting the system definition. To retrive keys, login to Stampede2, go to .ssh folder and copy your public key into a notepad. For private key, it is recommended to get a one liner private key using the command below. Save this key for later use as well.
 
 ```
 awk -v ORS='\\n' '1' private_key_name
