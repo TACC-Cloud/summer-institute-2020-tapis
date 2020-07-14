@@ -158,7 +158,7 @@ We covered what some of these keywords are in the storage systems section.  Belo
 Complete reference information is located here:
 [Systems](https://tacc-cloud.readthedocs.io/projects/agave/en/latest/agave/guides/systems/introduction.html)
 
-## Hands-on 
+## Hands-on Exercises
 
 As a hands on exercise, register the Stampede2 HPC as a execution system using the Tapis-CLI using the above JSON template. Copy the above template in new compute.json file on your pwd in the CLI terminal. Make changes into fields id, scratchDir, workDir,homeDir, auth stanza and customDirectives. Use your training project name and resevation name in customDirectives. 
 
