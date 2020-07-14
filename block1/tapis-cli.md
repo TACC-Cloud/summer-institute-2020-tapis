@@ -29,7 +29,7 @@ Using docker, we'll download and run an environment which allows the use of the 
 ```
 docker run --rm -it -v ${PWD}:/work -v ${HOME}/.tapis:/root/.agave tacc/tapis-cli:latest bash
 ```
-After waiting for the image to download, do you see the cow? (moo in the chat if you do) ```🐮 tapis-cli:alpha@77c693a9042b#```
+After waiting for the image to download, do you see the cow? (moo in the chat if you do) ```🐮 tapis-cli:1.0.0@4fab4de30c26#```
 
 We'll know Tapis CLI installed correctly when the `tapis -h` command returns some information about the application:
 
