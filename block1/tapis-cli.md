@@ -108,7 +108,7 @@ aggregate form with funders and Tapis platform stakeholders.
 
 Do you consent to this reporting? [Y/n]: Y
 ```
-After answering the yes or no questions, you should see `Enter a tenant name`. For those who may not know, a tenant is... TODO: What is a tenant?
+After answering the yes or no questions, you should see `Enter a tenant name`.
 
 We will be using the `portals` tenant, so type that as the tenant name and press enter. 
 
