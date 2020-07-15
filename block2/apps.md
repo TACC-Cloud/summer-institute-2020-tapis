@@ -110,10 +110,8 @@ cd ../ && bash wrapper.sh
 ```
 
 ## Step 6: Modify app.json in the CLI
-This is a templated app json file. By default, it will grab the app name, version, executionSystem, deploymentSystem, and other parameters from your project.ini. Copy the app.json from below and paste in your app.json and make following changes:
-* Change the name of execution system to your execution system name
+This is a templated app json file. By default, it will grab the app name, version, executionSystem, deploymentSystem, and other parameters from your project.ini. Copy the app.json from [here](./templates/app.json) and paste in your app.json and make following changes:
 * Change the value of deploymentPath to one obtained in Step 2
-* Change the name of deploymentSystem to your storage system name
 
 ### Application Metadata
 An example Tapis App JSON definition:
@@ -121,14 +119,14 @@ An example Tapis App JSON definition:
 ```
 {
   "checkpointable": false,
-  "name": "{{ app.name }}",
+  "name": " app.name ",
   "executionSystem": "replace with execution system name",
   "executionType": "HPC",
   "deploymentPath": "replace with deployment path",
   "deploymentSystem": "replace with storage system name",
   "helpURI": "",
-  "label": "{{ app.label }}",
-  "shortDescription": "{{ app.description }}",
+  "label": " app.label",
+  "shortDescription": "app.description",
   "longDescription": "",
   "modules": [
     "load tacc-singularity/3.4.2"
@@ -138,7 +136,7 @@ An example Tapis App JSON definition:
   "tags": [],
   "templatePath": "wrapper.sh",
   "testPath": "tester.sh",
-  "version": "{{ app.version }}",
+  "version": "app.version",
   "defaultMaxRunTime": "00:30:00",
   "inputs": [],
   "parameters": [

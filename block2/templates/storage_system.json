@@ -1,5 +1,5 @@
 {
-  "id": "UPDATEUSERNAME.tacc.S2.storage",
+  "id": "UPDATEUSERNAME.stampede2.storage",
   "name": "Storage system S2",
   "status": "UP",
   "type": "STORAGE",

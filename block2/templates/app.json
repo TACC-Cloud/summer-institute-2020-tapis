@@ -1,10 +1,10 @@
 {
   "checkpointable": false,
-  "name": "{{ app.name }}",
-  "executionSystem": "replace with execution system name",
+  "name": "{{ username }}-{{ app.name }}",
+  "executionSystem": "{{ app.execution_system }}",
   "executionType": "HPC",
   "deploymentPath": "replace with deployment path",
-  "deploymentSystem": "replace with storage system name",
+  "deploymentSystem": "{{ app.deployment_system }}",
   "helpURI": "",
   "label": "{{ app.label }}",
   "shortDescription": "{{ app.description }}",
