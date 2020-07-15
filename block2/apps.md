@@ -112,6 +112,8 @@ cd ../ && bash wrapper.sh
 ## Step 6: Modify app.json in the CLI
 This is a templated app json file. By default, it will grab the app name, version, executionSystem, deploymentSystem, and other parameters from your project.ini. Copy the app.json from [here](./templates/app.json) and paste in your app.json and make following changes:
 * Change the value of deploymentPath to one obtained in Step 2
+* Change the values of deploymentSystem to your storage system
+* Change the value of executionSystem to your execution system
 
 ### Application Metadata
 An example Tapis App JSON definition:
