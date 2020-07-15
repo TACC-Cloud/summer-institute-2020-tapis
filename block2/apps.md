@@ -82,7 +82,8 @@ In a separte terminal login to Stampede2 using your TACC credentials and TACC MF
 
 
 ## Step 4: Create a wrapper.sh
-In order to run your application, you will need to create a wrapper template that calls your executable code. For the sake of maintainability, it should be named something simple and intuitive like `wrapper.sh`. The singularity image to run the app is stored in a public location /work/05278/ajamthe/stampede2/public/gateways19-classifier.simg, make sure you **keep it as it is**
+In order to run your application, you will need to create a wrapper template that calls your executable code. For the sake of maintainability, it should be named something simple and intuitive like `wrapper.sh`. The singularity image to run the app is stored in a public location /work/05278/ajamthe/stampede2/public/gateways19-classifier.simg, make sure you **keep it as it is** Within a wrapper script, you can reference the ID of any Tapis(Agave) input or parameter from the app description. Before executing a wrapper script, Tapis(Agave) will look for the these references and substitute in whatever was that value was. This will make more sense once we start running jobs, but this is the way we connect what you tell the Tapis(Agave) API that you want to do and what actually runs on the execution system. The other thing Tapis(Agave) will do with the wrapper script is prepend all the scheduler information necessary to run the script on the execution system.
+
 * Create a file wrapper.sh in the deployment folder (on Stampede2) and copy the script below into the wrapper.sh 
 
 ```
