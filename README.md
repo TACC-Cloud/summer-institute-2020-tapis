@@ -20,7 +20,7 @@ Presenters:
 * Joe Stubbs (TACC)
 * Anagha Jamthe (TACC)
 * Julia Looney (TACC)
-* Elias Chalhoub (TACC)
+* Steve Black (TACC)
 * Christain Garcia (TACC)
 
 
