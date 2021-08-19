@@ -5,7 +5,7 @@ The following instructions will guide you through setting up Tapis CLI (command 
 
 The Tapis CLI commands all respond with help for -h and return back information on the parameters that can be passed.  
 
-Need help?  Ask your questions using the [TACC Institutes Slack Channel](https://app.slack.com/client/T015E2VMTLH/C015RUFEYBH)
+Need help?  Ask your questions using the [TACC Learn Slack Channel](https://join.slack.com/t/tacc-learn/shared_invite/zt-uuotnln4-mEFcfu61SGD2S6T5DnmaLg) 
 
 Initial Requirements
 ===============================================
@@ -15,7 +15,7 @@ Before getting started, you need to have the following:
 * Docker installed on your local computer
 * Familiarity with [working at the command line](http://www.gnu.org/software/bash/manual/bashref.html#Introduction)
 
-Any questions?  Join the [TACC Institute SLACK CHANNEL](https://app.slack.com/client/T015E2VMTLH/C015RUFEYBH) and ask away.
+Any questions?  Join the [TACC Learn Slack Channel](https://join.slack.com/t/tacc-learn/shared_invite/zt-uuotnln4-mEFcfu61SGD2S6T5DnmaLg) and ask away.
 
 
 Command Line Access
