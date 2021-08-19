@@ -10,7 +10,7 @@
   "shortDescription": "Image classifier app",
   "longDescription": "",
   "modules": [
-    "load tacc-singularity/3.4.2"
+    "load tacc-singularity/3.7.2"
   ],
   "ontology": [],
   "parallelism": "SERIAL",
