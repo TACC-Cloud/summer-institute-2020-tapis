@@ -6,8 +6,8 @@
   "deploymentPath": "replace with deployment path",
   "deploymentSystem": "{{ app.deployment_system }}",
   "helpURI": "",
-  "label": "{{ app.label }}",
-  "shortDescription": "{{ app.description }}",
+  "label": "classifier",
+  "shortDescription": "Image classifier app",
   "longDescription": "",
   "modules": [
     "load tacc-singularity/3.4.2"
@@ -17,7 +17,7 @@
   "tags": [],
   "templatePath": "wrapper.sh",
   "testPath": "tester.sh",
-  "version": "{{ app.version }}",
+  "version": "0.0.1",
   "defaultMaxRunTime": "00:30:00",
   "inputs": [],
   "parameters": [
