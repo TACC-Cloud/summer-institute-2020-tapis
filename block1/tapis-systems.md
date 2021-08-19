@@ -52,8 +52,9 @@ More details on the possible parameters for storage systems can be found in the 
 ## Hands-on Exercises
 
 ### Keys retrival
+Login to stampede2.tacc.utexas.edu using using TACC credentials and MFA token <br/>
 Before you start working on the storage system definition please make sure that your public key is placed in the authorized keys file on Stampede2. <br/>
-Keep the public key and private key handy, these are required for crafting the system definition. For private key, it is recommended to get a one liner private key using the command below. 
+Keep the public key and private key handy (you can copy them in a notepad for the time being and then delete), these are required for crafting the system definition. For private key, it is recommended to get a one liner private key using the command below. 
 
 ```
 awk -v ORS='\\n' '1' private_key_name
