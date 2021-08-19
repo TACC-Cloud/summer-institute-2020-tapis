@@ -25,7 +25,7 @@ Presenters:
 
 
 ## Intro to Tapis 
-* [Intro to Tapis(Agave)](./block1/tapis-intro.md)
+* [Intro to Tapis](./block1/tapis-intro.md)
 
 * [Intro to Tapis CLI](./block1/tapis-cli.md)
 
@@ -34,8 +34,8 @@ Presenters:
 
 ## Tapis Apps
 * [Intro to Apps](./block2/apps.md)
-  * [What is a Tapis(Agave) app?](./block2/apps.md#what-is-a-tapisagave-app)
-  * [Tapis(Agave) Apps service](./block2/apps.md#tapisagave-apps-service)
+  * [What is a Tapis app?](./block2/apps.md#what-is-a-tapisagave-app)
+  * [Tapis Apps service](./block2/apps.md#tapisagave-apps-service)
   * [Create Private App: Image Classifier](./block2/apps.md#create-private-app:-image-classifier)
   * [List Apps](./block2/apps.md#list-apps)
   * [Managing App Permissions](./block2/apps.md#apps-permissions)
