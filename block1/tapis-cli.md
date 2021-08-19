@@ -130,40 +130,40 @@ We will be using the `portals` tenant, so type that as the tenant name and press
 | vdjserver.org |              VDJ Server              | https://vdj-agave-api.tacc.utexas.edu/ |
 +---------------+--------------------------------------+----------------------------------------+
 Enter a tenant name [tacc.prod]: portals
-tacc.prod username: your_tacc_username
-tacc.prod password for your_tacc_username: [PASSWORD]
+tacc.prod username: [YOUR_TACC_USERNAME]
+tacc.prod password for your_tacc_username: [YOUR_TACC_PASSWORD]
 
 Container registry access:
 --------------------------
 Registry Url [https://index.docker.io]: [ENTER]
-Registry Username: n/a
-Registry Password: n/a
-Registry Namespace: n/a
+Registry Username: [ENTER]
+Registry Password: [ENTER]
+Registry Namespace: [ENTER]
 
 Git server access:
 ------------------
-Git Username: n/a
+Git Username: [ENTER]
 Learn about github.com personal access tokens:
 https://help.github.com/en/github/authenticating-to-github/creating-a-personal-access-token-for-the-command-line
-Git Token: n/a
-Git Namespace [n/a]: n/a
+Git Token: [ENTER]
+Git Namespace [n/a]: [ENTER]
 +--------------------+--------------------------------------+
 | Field              | Value                                |
 +--------------------+--------------------------------------+
 | tenant_id          | portals                              |
-| username           | your_tacc_username                   |
+| username           | [YOUR_TACC_USERNAME]                 |
 | client_name        | _cli-portals-username-a6fb810bd43e   |
 | api_key            | 0fvGYkdummypTsVASlpBdummy48a         |
 | access_token       | 1234345636b1106698f581erhfg4d3a8     |
 | expires_at         | Mon Jul 13 21:19:26 2020             |
 | verify             | True                                 |
 | registry_url       | https://index.docker.io              |
-| registry_username  | n/a                                  |
-| registry_password  | n*a                                  |
-| registry_namespace | n/a                                  |
-| git_username       | n/a                                  |
-| git_token          | n*a                                  |
-| git_namespace      | n/a                                  |
+| registry_username  |                                      |
+| registry_password  |                                      |
+| registry_namespace |                                      |
+| git_username       |                                      |
+| git_token          |                                      |
+| git_namespace      |                                      |
 +--------------------+--------------------------------------+
 ```
 
@@ -179,7 +179,7 @@ tapis auth show
 | Field         | Value                            |
 +---------------+----------------------------------+
 | tenant_id     | portals                          |
-| username      | your_tacc_username               |
+| username      | [YOUR_TACC_USERNAME]             |
 | api_key       | 0fvGYkdummypTsVASlpBdummy48a     |
 | access_token  | 1234345636b1106698f581erhfg4d3a8 |
 | expires_at    | Mon Jul 13 21:19:26 2020         |
