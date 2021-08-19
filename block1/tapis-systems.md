@@ -61,10 +61,15 @@ Keep the public key and private key handy (you can copy them in a notepad for th
 awk -v ORS='\\n' '1' private_key_name
 
 ```
+save the value of work directory in a notepad. To get this values run the following command
+
+```
+echo $WORK
+```
 
 ### System definition
 
-Copy the above system definition template in a new storage.json file on your present working directory on the CLI terminal. Please make sure to change the username, homeDir and auth block in the above template. Copy the one liner keys in the auth block. Once your system definition is ready, use the command below to register the system.
+Create a new storage.json file on your present working directory on the CLI terminal and copy the above system definition template in it. Please make sure to change the username, homeDir(value of $WORK from above) and auth block in the above template. Copy the one liner keys in the auth block. Once your system definition is ready, use the command below to register the system.
 
 
 CLI command to register system is:
