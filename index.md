@@ -8,12 +8,13 @@
 * 10:00AM - Welcome
 * 10:15AM - Tapis Introduction
 * 10:30AM - Introduction to Tapis CLI
-* 11:30AM - Lunch
-* 12:00PM - Registering Tapis Systems
-* 1:30PM  - Break
-* 2:00PM  - Registering Tapis Apps
-* 2:30PM  - Launching Tapis Jobs
-* 3:15PM  - Workshop Wrap-up, Q/A
+* 11:00AM - Registering Tapis Systems
+* 12:00PM - Lunch
+* 2:00PM  - Debug systems
+* 2:15PM  - Registering Tapis Apps
+* 2:45PM  - Launching Tapis Jobs
+* 3:30PM  - Workshop Wrap-up, Q/A
+
 
 ## Workshop Introduction
 Presenters: 
