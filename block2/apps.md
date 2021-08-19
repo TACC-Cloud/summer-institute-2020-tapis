@@ -1,13 +1,13 @@
-# Intro to Tapis(Agave) Apps 
+# Intro to Tapis Apps 
 ---
 
-### What is a Tapis(Agave) app? 
+### What is a Tapis app? 
 A Tapis(Agave) App is versioned, containerized executable that runs on a specific execution system through Tapis(Aloe) Jobs service.  
 So, for example, if you have multiple versions of a software package on a system, you would register each version as its own app. Likewise, if a single application code needs to be run on multiple systems, each combination of app and system needs to be defined as an app.
 Once you have storage and execution systems registered with Tapis(Agave), you are ready to build and use apps. 
 
 
-### Tapis(Agave) Apps service
+### Tapis Apps service
 Apps service is a central registry for all Tapis(Agave) apps. With Apps service you can:  
 * list or search apps
 * register new apps
