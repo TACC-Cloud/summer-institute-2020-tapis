@@ -26,7 +26,7 @@ Presenters:
 
 
 ## Intro to Tapis 
-* [Intro to Tapis(Agave)](./block1/tapis-intro.md)
+* [Intro to Tapis](./block1/tapis-intro.md)
 
 * [Intro to Tapis CLI](./block1/tapis-cli.md)
 
