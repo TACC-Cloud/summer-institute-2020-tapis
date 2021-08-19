@@ -89,7 +89,7 @@ Within a wrapper script, you can reference the ID of any Tapis input or paramete
 
 ```
 #/bin/bash
-module load tacc-singularity/3.4.2
+module load tacc-singularity/3.7.2
 
 singularity run /work2/05278/ajamthe/stampede2/public/gateways19-classifier.simg  python /classify_image.py ${imagefile} ${predictions} > predictions.txt
 
@@ -102,7 +102,7 @@ A test script named something simple and intuitive like `tester.sh`, along with 
 
 ```
 #!/bin/bash
-module load tacc-singularity/3.4.2
+module load tacc-singularity/3.7.2
 
 export imagefile="--image_file=https://s3.amazonaws.com/cdn-origin-etr.akc.org/wp-content/uploads/2017/11/12231410/Labrador-Retriever-On-White-01.jpg"
 export predictions="--num_top_predictions 5"
@@ -133,7 +133,7 @@ An example Tapis App JSON definition:
   "shortDescription": "app.description",
   "longDescription": "",
   "modules": [
-    "load tacc-singularity/3.4.2"
+    "load tacc-singularity/3.7.2"
   ],
   "ontology": [],
   "parallelism": "SERIAL",
