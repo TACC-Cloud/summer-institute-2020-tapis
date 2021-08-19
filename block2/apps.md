@@ -38,10 +38,10 @@ The response should look like
 | clone | Project path: ./classifier_app        |
 +-------+---------------------------------------+
 ```
-This will create a new template app folder (in this case, called ~/classifier_app)
+This will create a new template app folder (in this case, called ./classifier_app)
 
 ```
-$ ls -la classifier_app
+$ ls -la ./classifier_app
 classifier_app
 ├── Dockerfile
 ├── app.json
@@ -74,15 +74,15 @@ deployment_system = {input your private storage system created in this tutorial}
 execution_system = {input your private execution system created in this tutorial}
 ```
 
-## Step 3: Create a deployment folder on $WORK of Stampede2
+## Step 3: Create a deployment folder on $WORK2 of Stampede2
 In a separte terminal login to Stampede2 using your TACC credentials and TACC MFA token
-* cd $WORK
+* cd $WORK2
 * mkdir classifyapp
 * Note this path for later use. This is the deploymentPath that you will need to update in the app.json
 
 
 ## Step 4: Create a wrapper.sh
-In order to run your application, you will need to create a wrapper template that calls your executable code. For the sake of maintainability, it should be named something simple and intuitive like `wrapper.sh`. The singularity image to run the app is stored in a public location /work/05278/ajamthe/stampede2/public/gateways19-classifier.simg, make sure you **keep it as it is** Within a wrapper script, you can reference the ID of any Tapis input or parameter from the app description. Before executing a wrapper script, Tapiswill look for the these references and substitute in whatever was that value was. This will make more sense once we start running jobs, but this is the way we connect what you tell the Tapis API that you want to do and what actually runs on the execution system. The other thing Tapis will do with the wrapper script is prepend all the scheduler information necessary to run the script on the execution system.
+In order to run your application, you will need to create a wrapper template that calls your executable code. For the sake of maintainability, it should be named something simple and intuitive like `wrapper.sh`. The singularity image to run the app is stored in a public location /work2/05278/ajamthe/stampede2/public/gateways19-classifier.simg, make sure you **keep it as it is** Within a wrapper script, you can reference the ID of any Tapis input or parameter from the app description. Before executing a wrapper script, Tapiswill look for the these references and substitute in whatever was that value was. This will make more sense once we start running jobs, but this is the way we connect what you tell the Tapis API that you want to do and what actually runs on the execution system. The other thing Tapis will do with the wrapper script is prepend all the scheduler information necessary to run the script on the execution system.
 
 * Create a file wrapper.sh in the deployment folder (on Stampede2) and copy the script below into the wrapper.sh 
 
@@ -90,7 +90,7 @@ In order to run your application, you will need to create a wrapper template tha
 #/bin/bash
 module load tacc-singularity/3.4.2
 
-singularity run /work/05278/ajamthe/stampede2/public/gateways19-classifier.simg  python /classify_image.py ${imagefile} ${predictions} > predictions.txt
+singularity run /work2/05278/ajamthe/stampede2/public/gateways19-classifier.simg  python /classify_image.py ${imagefile} ${predictions} > predictions.txt
 
 ```
 
