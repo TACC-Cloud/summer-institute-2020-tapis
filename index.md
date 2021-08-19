@@ -35,8 +35,8 @@ Presenters:
 
 ## Tapis Apps
 * [Intro to Apps](./block2/apps.md)
-  * [What is a Tapis(Agave) app?](./block2/apps.md#what-is-a-tapisagave-app)
-  * [Tapis(Agave) Apps service](./block2/apps.md#tapisagave-apps-service)
+  * [What is a Tapis app?](./block2/apps.md#what-is-a-tapisagave-app)
+  * [Tapis Apps service](./block2/apps.md#tapisagave-apps-service)
   * [App Packaging](./block2/apps.md#app-packaging)
   * [Application metadata](./block2/apps.md#application-metadata)
   * [Registering App](./block2/apps.md#registering-an-app)
