@@ -2,24 +2,24 @@
 ---
 
 ### What is a Tapis app? 
-A Tapis(Agave) App is versioned, containerized executable that runs on a specific execution system through Tapis(Aloe) Jobs service.  
+A Tapis App is versioned, containerized executable that runs on a specific execution system through Tapis(Aloe) Jobs service.  
 So, for example, if you have multiple versions of a software package on a system, you would register each version as its own app. Likewise, if a single application code needs to be run on multiple systems, each combination of app and system needs to be defined as an app.
-Once you have storage and execution systems registered with Tapis(Agave), you are ready to build and use apps. 
+Once you have storage and execution systems registered with Tapis, you are ready to build and use apps. 
 
 
 ### Tapis Apps service
-Apps service is a central registry for all Tapis(Agave) apps. With Apps service you can:  
+Apps service is a central registry for all Tapis apps. With Apps service you can:  
 * list or search apps
 * register new apps
 * manage or share app permissions
 * revise existing apps
 * view information about each app such as its version number, owner, revision number to name a few <br/>
 
-The rest of this tutorial explains details about how to package your Tapis(Agave) app, register your app with the Apps service and some other useful CLI commands for Apps. 
+The rest of this tutorial explains details about how to package your Tapis app, register your app with the Apps service and some other useful CLI commands for Apps. 
 
 
 ### Create Private App: Image Classifier 
-Tapis(Agave) apps are bundled into a directory and organized in a way that Tapis(Aloe) jobs can properly invoke it. Tapis(Aloe) is the new code name for rearchitectured Agave Jobs service. We will discuss more on this in the next part of the tutorial. 
+Tapisapps are bundled into a directory and organized in a way that Tapis(Aloe) jobs can properly invoke it. Tapis(Aloe) is the new code name for rearchitectured Jobs service. We will discuss more on this in the next part of the tutorial. 
 
 ## Step 1: Initialize the app directory with following CLI command
 ```
@@ -82,7 +82,7 @@ In a separte terminal login to Stampede2 using your TACC credentials and TACC MF
 
 
 ## Step 4: Create a wrapper.sh
-In order to run your application, you will need to create a wrapper template that calls your executable code. For the sake of maintainability, it should be named something simple and intuitive like `wrapper.sh`. The singularity image to run the app is stored in a public location /work/05278/ajamthe/stampede2/public/gateways19-classifier.simg, make sure you **keep it as it is** Within a wrapper script, you can reference the ID of any Tapis(Agave) input or parameter from the app description. Before executing a wrapper script, Tapis(Agave) will look for the these references and substitute in whatever was that value was. This will make more sense once we start running jobs, but this is the way we connect what you tell the Tapis(Agave) API that you want to do and what actually runs on the execution system. The other thing Tapis(Agave) will do with the wrapper script is prepend all the scheduler information necessary to run the script on the execution system.
+In order to run your application, you will need to create a wrapper template that calls your executable code. For the sake of maintainability, it should be named something simple and intuitive like `wrapper.sh`. The singularity image to run the app is stored in a public location /work/05278/ajamthe/stampede2/public/gateways19-classifier.simg, make sure you **keep it as it is** Within a wrapper script, you can reference the ID of any Tapis input or parameter from the app description. Before executing a wrapper script, Tapiswill look for the these references and substitute in whatever was that value was. This will make more sense once we start running jobs, but this is the way we connect what you tell the Tapis API that you want to do and what actually runs on the execution system. The other thing Tapis will do with the wrapper script is prepend all the scheduler information necessary to run the script on the execution system.
 
 * Create a file wrapper.sh in the deployment folder (on Stampede2) and copy the script below into the wrapper.sh 
 
@@ -190,11 +190,11 @@ An example Tapis App JSON definition:
 }
 
 ```
-* **name** - Apps are given an ID by combining the "name" and "version". That combination must be unique across the entire Tapis(Agave) tenant, so unless you are an admin creating public system, you should probably put your username somewhere in there, and it's often useful to have the system name somehow referenced there too. You shouldn't use spaces in the name.
-* **version** - This should be the version of the software package that you are wrapping.  If you end up updating your app description later on, Tapis(Agave) will keep track of the app revision separately, so there is no need to reflect that here.
-* **deploymentSystem** - The data storage system where you keep the app assets, such as the wrapper script, test script, etc.  App assets are not stored on the execution system where they run.  For provenance and reproducibility, Tapis(Agave) requires that you keep them on a cloud storage system.
+* **name** - Apps are given an ID by combining the "name" and "version". That combination must be unique across the entire Tapis tenant, so unless you are an admin creating public system, you should probably put your username somewhere in there, and it's often useful to have the system name somehow referenced there too. You shouldn't use spaces in the name.
+* **version** - This should be the version of the software package that you are wrapping.  If you end up updating your app description later on, Tapis will keep track of the app revision separately, so there is no need to reflect that here.
+* **deploymentSystem** - The data storage system where you keep the app assets, such as the wrapper script, test script, etc.  App assets are not stored on the execution system where they run.  For provenance and reproducibility, Tapis requires that you keep them on a cloud storage system.
 * **deploymentPath** - the directory on the deploymentSystem where the app bundle is located
-* **templatePath** - This template is what Tapis(Agave) uses to run your app.  The path you specify here is relative to the deploymentPath
+* **templatePath** - This template is what Tapis uses to run your app.  The path you specify here is relative to the deploymentPath
 * **testPath** - The intention here is that you include a testcase inside of your app bundle.
 * **argument** - In combination with "showArgument", the "argument" keyword is a convenience that lets you build up commandline arguments in your wrapper script.
 * **Cardinality** - Sets the min and max number of files you can give for inputs and outputs.  A "maxCardinality" of -1 will accept an unlimited number of files.
@@ -206,7 +206,7 @@ Registering an app with the Apps service is conceptually simple. Just describe y
 ```
 $ tapis apps create -F app.json 
 ```
-Tapis(Agave) will check the app description, look for the app bundle on the deploymentSystem, and if everything passes, make it available to run jobs with Tapis Jobs service.<br/>
+Tapis will check the app description, look for the app bundle on the deploymentSystem, and if everything passes, make it available to run jobs with Tapis Jobs service.<br/>
 
 Some other useful CLI commands:
 
