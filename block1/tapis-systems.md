@@ -22,7 +22,7 @@ Storage systems tell Tapis where data resides.  You can store files for running 
     "port": 22,
     "protocol": "SFTP",
     "rootDir": "/",
-    "homeDir": "/work/dir../UPDATEUSERNAME/stampede2",
+    "homeDir": "/work2/dir../UPDATEUSERNAME/stampede2",
     "auth": {
       "username": "UPDATEUSERNAME",
       "publicKey":"paste public key here",
@@ -64,12 +64,12 @@ awk -v ORS='\\n' '1' private_key_name
 save the value of work directory in a notepad. To get this values run the following command
 
 ```
-echo $WORK
+echo $WORK2
 ```
 
 ### System definition
 
-Create a new storage.json file on your present working directory on the CLI terminal and copy the above system definition template in it. Please make sure to change the username, homeDir(value of $WORK from above) and auth block in the above template. Copy the one liner keys in the auth block. Once your system definition is ready, use the command below to register the system.
+Create a new storage.json file on your present working directory on the CLI terminal and copy the above system definition template in it. Please make sure to change the username, homeDir(value of $WORK2 from above) and auth block in the above template. Copy the one liner keys in the auth block. Once your system definition is ready, use the command below to register the system.
 
 
 CLI command to register system is:
