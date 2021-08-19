@@ -9,7 +9,7 @@ nav:
   - Welcome and Background:
     - Welcome: ''
   - Intro to Tapis and The Command Line Interface:
-    - Intro to Tapis(Agave): block1/tapis-intro
+    - Intro to Tapis: block1/tapis-intro
     - Intro to Tapis CLI: block1/tapis-cli
   - Tapis Systems:
     - Intro to Tapis Systems: block1/tapis-systems
