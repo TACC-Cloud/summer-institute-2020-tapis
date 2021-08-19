@@ -59,3 +59,7 @@ Presenters:
   * [App](./block2/templates/app.json)
   * [Job](./block2/templates/job.json)
   * [Wrapper](./block2/templates/wrapper.sh)
+
+## ENd
+  * [Closing Remarks](./block2/close.md)
+
