@@ -66,7 +66,7 @@ A brief summary of the files are as follows:
 * project.ini: initialization parameters for the app which are injected in to app.json
 
 
-## Step 2: Edit the project.ini file
+## Step 2: Edit the project.ini file (Optional step)
 By default, the fields are populated by some of the flags specified on the command line or picked up from the environment. 
 Set the following and unncomment these two lines:
 ```
