@@ -60,6 +60,6 @@ Presenters:
   * [Job](./block2/templates/job.json)
   * [Wrapper](./block2/templates/wrapper.sh)
 
-## ENd
+## Wrap Up
   * [Closing Remarks](./block2/close.md)
 
