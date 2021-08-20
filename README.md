@@ -21,7 +21,7 @@ Presenters:
 * Anagha Jamthe (TACC)
 * Julia Looney (TACC)
 * Steve Black (TACC)
-* Christain Garcia (TACC)
+* Christian Garcia (TACC)
 
 
 ## Intro to Tapis 
